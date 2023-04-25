@@ -18,7 +18,6 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  
-    
-    font-family: "Chakra Petch",sans-serif!important;
+
+  font-family: "Chakra Petch", sans-serif !important;
 }

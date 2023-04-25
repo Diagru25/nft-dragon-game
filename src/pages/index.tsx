@@ -1,16 +1,25 @@
-import Image from "next/image";
 import { Inter, Chakra_Petch } from "next/font/google";
-import InputLabel from "@/components/input-label/InputLabel";
+import SpaceDiv from "@/components/space-div/SpaceDiv";
+import Banner from "@/components/banner/Banner";
+import FormSection from "@/components/form-section/FormSection";
+import PerksSection from "@/components/perks-section/PerksSection";
+import TokenomicsSection from "@/components/tokenomics-section/TokenomicsSection";
+import RoadmapSection from "@/components/roadmap-section/RoadmapSection";
 
-const inter = Chakra_Petch({ subsets: ["latin"], weight: "400" });
+//const inter = Chakra_Petch({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+    //className={`${inter.className}`}
     >
-        <InputLabel/>
-        <input placeholder="dihasisaisdha"/>
+      <SpaceDiv />
+      <SpaceDiv />
+      <Banner />
+      <FormSection/>
+      <PerksSection/>
+      <TokenomicsSection/>
+      <RoadmapSection/>
     </main>
   );
 }

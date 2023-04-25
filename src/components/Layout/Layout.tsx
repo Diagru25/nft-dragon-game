@@ -1,11 +1,11 @@
 import { Fragment } from "react";
-import Header from "@/components/Header/Header";
+import Header from "@/components/header/Header";
 
 export default function Layout(props: any) {
   return (
-    <Fragment>
+    <div className="bg-black">
       <Header />
       {props.children}
-    </Fragment>
+    </div>
   );
 }

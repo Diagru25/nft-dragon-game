@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function Header() {
   return (
-    <div className="flex justify-between items-center px-8 py-2 bg-sky-600">
+    <div className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-2 bg-sky-600 z-10">
       <div>
         <img
           src="https://aishibaog.xyz/static/media/logo.adf6243f.png"
