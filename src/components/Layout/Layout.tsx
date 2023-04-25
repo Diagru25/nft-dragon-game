@@ -1,11 +1,13 @@
-import { Fragment } from "react";
-import Header from "@/components/header/Header";
+import Header from '@/components/header/Header'
+import Footer from '@/components/footer/Footer'
+import { Fragment } from 'react'
 
 export default function Layout(props: any) {
-  return (
-    <div className="bg-black">
-      <Header />
-      {props.children}
-    </div>
-  );
+	return (
+		<Fragment>
+			<Header />
+			<Fragment>{props.children}</Fragment>
+			<Footer />
+		</Fragment>
+	)
 }
