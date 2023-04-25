@@ -8,8 +8,8 @@ export default function PerksSection() {
         <div className=" flex bg-orange-600 text-white">
           <PerkItem title="OwnerShip">
             <p>
-              By owning one of our 48000 AiShiba OG Collection, you
-              automatically become an early member of AiShiba army.
+              By owning one of our 48000 AiChicken OG Collection, you
+              automatically become an early member of AiChicken army.
             </p>
             <br />
             <p>
@@ -20,7 +20,7 @@ export default function PerksSection() {
           </PerkItem>
           <PerkItem title="100% Community-Owned">
             <p>
-              AiShiba is built different that is why we are allocating 100% of
+              AiChicken is built different that is why we are allocating 100% of
               our tokens to the community to decide the value of the project.
             </p>
             <br />

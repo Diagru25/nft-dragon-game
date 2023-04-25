@@ -13,7 +13,7 @@ const roadmapData = [
   {
     title: "Phase 2: Token Creation and Distribution",
     children: [
-      "Launch the AiShiba OG NFT Collection.",
+      "Launch the AiChicken OG NFT Collection.",
       "Launch the token on a decentralized exchange (DEX) platform, such as Uniswap or Camelot Dex.",
       "Set a total supply for the token and decide on an initial distribution strategy for airdrops and work with auditors to ensure the token’s code is secure and free from vulnerabilities.",
     ],
@@ -21,7 +21,7 @@ const roadmapData = [
   {
     title: "Phase 3: Initial Exchange Listing",
     children: [
-      "Apply for AiShiba listing on major centralized exchanges (CEX) such as Mexc, Binance, Coinbase, or Kraken.",
+      "Apply for AiChicken listing on major centralized exchanges (CEX) such as Mexc, Binance, Coinbase, or Kraken.",
       "Engage in marketing efforts to increase the token’s visibility and attract investors.",
       "Coingecko and CoinMarket listings.",
     ],
@@ -29,25 +29,25 @@ const roadmapData = [
   {
     title: "Phase 4: Community Building and Growth",
     children: [
-      "Launch a community forum and engage with Aishiba Arb token holders to gather feedback and improve the project.",
+      "Launch a community forum and engage with AiChicken Arb token holders to gather feedback and improve the project.",
       "Host events and promotions to incentivize people to hold and use the token, such as contests or giveaways.",
-      "Build partnerships with other projects and influencers to expand Aishiba Arb’s reach.",
+      "Build partnerships with other projects and influencers to expand AiChicken Arb’s reach.",
     ],
   },
   {
     title: "Phase 5: Project Expansion",
     children: [
-      "Launch additional features, such as staking or yield farming, to provide additional benefits to Aishiba Arb token holders.",
+      "Launch additional features, such as staking or yield farming, to provide additional benefits to AiChicken Arb token holders.",
       "Develop a mobile wallet or other tools to make it easier for people to use and hold the token.",
-      "Explore opportunities to integrate Aishiba Arb into other blockchain ecosystems, such as DeFi protocols or NFT marketplaces.",
+      "Explore opportunities to integrate AiChicken Arb into other blockchain ecosystems, such as DeFi protocols or NFT marketplaces.",
     ],
   },
   {
     title: "Phase 6: Long-Term Sustainability",
     children: [
-      "Continue to build and engage with the Aishiba Arb community to ensure the project’s longevity.",
+      "Continue to build and engage with the AiChicken Arb community to ensure the project’s longevity.",
       "Explore options for governance and decentralization to make the project more community-driven and sustainable over the long term.",
-      "Work with regulators and compliance experts to ensure that Aishiba Arb remains compliant with applicable laws and regulations.",
+      "Work with regulators and compliance experts to ensure that AiChicken Arb remains compliant with applicable laws and regulations.",
     ],
   },
 ];

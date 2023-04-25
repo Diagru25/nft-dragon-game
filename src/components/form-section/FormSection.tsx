@@ -156,7 +156,7 @@ const FormOne = () => {
       <p className="font-light my-4">Who is eligible??</p>
       <div className="flex gap-2 items-center">
         <CheckCircleIcon className="w-6 h-6 stroke-black stroke-2" />
-        <p className="my-4 font-bold">AiShiba OG Collection NFT Holder</p>
+        <p className="my-4 font-bold">AiChicken OG Collection NFT Holder</p>
       </div>
       <div className="mt-4">
         <InputLabel

@@ -6,7 +6,7 @@ export default function TokenomicsSection() {
         <h1 className="text-5xl my-9 font-bold text-white">Tokenomics</h1>
         <div>
           <p className="text-gray-400">
-            SHIBAI is the fundamental token within the AiShiba ecosystem. It
+            SHIBAI is the fundamental token within the AiChicken ecosystem. It
             possesses powerful deflationary attributes and offers users the
             opportunity to generate passive income via staking, thereby
             establishing enduring value for the token.

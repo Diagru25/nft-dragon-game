@@ -8,7 +8,7 @@ export default function Banner() {
       <div className=" text-gray-400">
         <div className="pl-10">
           <h1 className="text-5xl my-9 font-bold text-white">
-            Meet <span className="text-orange-400">Ai</span>Shiba
+            Meet <span className="text-orange-400">Ai</span>Chicken
           </h1>
           <h4 className="my-2 font-bold">
             The Community-inspired meme coin for arbitrum blockchain
