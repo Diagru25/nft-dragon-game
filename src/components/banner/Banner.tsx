@@ -1,4 +1,6 @@
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
+import img from "@/assets/chicken.png";
 
 export default function Banner() {
   return (
@@ -25,10 +27,9 @@ export default function Banner() {
           </div>
         </div>
       </div>
-      <img
-        src="	https://aishibaog.xyz/static/media/aishiba.31ffc014.png"
+      <Image
+        src={img}
         alt="img"
-        //className="absolute left-1/2 bottom-[1%] w-[40%]"
         style={{
           position: "absolute",
           left: "50%",

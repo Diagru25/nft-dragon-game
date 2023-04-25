@@ -1,11 +1,12 @@
 import Image from "next/image";
+import img from "@/assets/chicken.png";
 
 function Header() {
   return (
     <div className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-2 bg-sky-600 z-10">
       <div>
-        <img
-          src="https://aishibaog.xyz/static/media/logo.adf6243f.png"
+        <Image
+          src={img}
           alt="img"
           width={60}
           height={60}
