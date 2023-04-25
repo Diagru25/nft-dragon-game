@@ -1,16 +1,12 @@
 import Image from "next/image";
 import img from "@/assets/chicken.png";
+import ButtonConnectWallet from "../button-connect-wallet/ButtonConnectWallet";
 
 function Header() {
   return (
     <div className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-2 bg-sky-600 z-10">
       <div>
-        <Image
-          src={img}
-          alt="img"
-          width={60}
-          height={60}
-        />
+        <Image src={img} alt="img" width={60} height={60} />
       </div>
       <div className="flex items-center gap-8 pr-4">
         <nav className="flex items-center gap-3">
@@ -21,7 +17,7 @@ function Header() {
           <a className="hover:text-white hover:cursor-pointer">Tokenomics</a>
           <a className="hover:text-white hover:cursor-pointer">Roadmap</a>
         </nav>
-        <button
+        {/* <button
           className="text-white shadow-md p-2 rounded-md hover:bg-blue-800"
           style={{
             boxShadow:
@@ -29,7 +25,8 @@ function Header() {
           }}
         >
           CONNECT WALLET
-        </button>
+        </button> */}
+        <ButtonConnectWallet/>
       </div>
     </div>
   );
