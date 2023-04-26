@@ -1,4 +1,5 @@
 import Card from '../common/Card'
+import Section from '../common/Section'
 
 export default function PerksSection() {
 	const perks: Array<{ title: string; description: string }> = [
@@ -26,16 +27,19 @@ export default function PerksSection() {
 		},
 	]
 	return (
-		<section className='w-full bg-primary-light py-10'>
-			<div className='flex flex-col items-center container mx-auto  '>
-				<p className='text-5xl text-primary pb-10 font-black'>Perks</p>
-				<div className='flex flex-wrap gap-5 justify-center items-center'>
-					{perks.map((perk) => (
-						<div key={perk.title} className='sm:w-full w-2/5'>
-							<Card title={perk.title} description={perk.description}></Card>
-						</div>
-					))}
-				</div>
+		<section className='w-full bg-primary-light py-10 px-5'>
+			<div className='flex flex-col items-center container mx-auto'>
+				<Section title='Perk'>
+					<div className='grid sm:grid-rows-1 sm:grid-cols-1 grid-rows-2 grid-cols-2 gap-4'>
+						{perks.map((perk, index) => (
+							<Card
+								key={index}
+								title={perk.title}
+								description={perk.description}
+							></Card>
+						))}
+					</div>
+				</Section>
 			</div>
 		</section>
 	)

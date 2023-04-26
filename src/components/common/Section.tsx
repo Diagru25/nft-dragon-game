@@ -5,8 +5,10 @@ const Section: FC<{ title: string; children: React.ReactNode }> = ({
 	children,
 }) => {
 	return (
-		<section className=''>
-			<h1>{title}</h1>
+		<section className='flex flex-col justify-center items-center'>
+			<p className='text-5xl text-primary pb-10 font-black text-center'>
+				{title}
+			</p>
 			{children}
 		</section>
 	)
