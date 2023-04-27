@@ -54,7 +54,7 @@ const roadmapData = [
 ]
 export default function Roadmap() {
 	return (
-		<section id='#roadmap' className='py-10 sm:px-5 bg-primary-light'>
+		<section id='roadmap' className='py-10 sm:px-5 bg-primary-light'>
 			<div className='container mx-auto flex flex-col justify-center items-center'>
 				<Section title='Roadmap'>
 					<div className='flex flex-col gap-5 lg:border-l-4 lg:border-l-primary lg:pl-8'>
