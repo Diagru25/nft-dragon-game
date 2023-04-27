@@ -1,4 +1,4 @@
-import Header from '@/components/header/Header'
+import Header from '@/components/header-section/Header'
 import Footer from '@/components/footer/Footer'
 import { Fragment } from 'react'
 
