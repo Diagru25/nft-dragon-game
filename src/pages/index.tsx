@@ -4,6 +4,7 @@ import FormSection from '@/components/form-section/FormSection'
 import PerksSection from '@/components/perks/Perks'
 import TokenomicsSection from '@/components/tokenomics/Tokenomics'
 import RoadmapSection from '@/components/roadmap/Roadmap'
+import Exchange from "@/components/exchange/Exchange";
 
 const montserrat = Montserrat({
 	subsets: ['latin', 'vietnamese'],
@@ -12,14 +13,15 @@ const montserrat = Montserrat({
 
 export default function Home() {
 	return (
-		<main className={`${montserrat.className} sm:mt-16`}>
-			<section className='pb-10'>
-				<Banner />
-				<FormSection />
-			</section>
-			<PerksSection />
-			<TokenomicsSection />
-			<RoadmapSection />
-		</main>
-	)
+    <main className={`${montserrat.className} sm:mt-16`}>
+      <section className="pb-10">
+        <Banner />
+        <FormSection />
+      </section>
+      <PerksSection />
+      <TokenomicsSection />
+      <RoadmapSection />
+      <Exchange />
+    </main>
+  );
 }

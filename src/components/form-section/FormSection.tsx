@@ -114,10 +114,12 @@ const FormTwo = () => {
       <div className="mt-4">
         <InputLabel
           name="nftNumber"
+          label="Your Airdrop Allocation"
+          placeholder="0.00"
           onChange={form.handleChange}
           value={form.values.nftNumber}
         />
-        {form.errors.nftNumber && (
+        {(form.errors.nftNumber && form.touched.nftNumber) && (
           <span className=" text-xs" style={{ color: "red" }}>
             {form.errors.nftNumber}
           </span>
@@ -138,11 +140,13 @@ const FormOne = () => {
   const form = useFormik({
     initialValues: {
       nftNumber: "",
+      address: "",
     },
     validationSchema: Yup.object().shape({
       nftNumber: Yup.number()
         .required("Value is not Empty")
         .moreThan(0, "Value must be greater than 0"),
+      address: Yup.string().required("Value is not empty"),
     }),
     onSubmit: (data) => {
       //Code here
@@ -159,17 +163,36 @@ const FormOne = () => {
         <CheckCircleIcon className="w-6 h-6 stroke-black stroke-2" />
         <p className="my-4 font-bold">AiChicken OG Collection NFT Holder</p>
       </div>
-      <div className="mt-4">
-        <InputLabel
-          name="nftNumber"
-          onChange={form.handleChange}
-          value={form.values.nftNumber}
-        />
-        {form.errors.nftNumber && (
-          <span style={{ color: "red" }} className="text-xs">
-            {form.errors.nftNumber}
-          </span>
-        )}
+      <div className="flex flex-col gap-6 mt-4">
+        <div>
+          <InputLabel
+            label="Your Airdrop Allocation"
+            name="nftNumber"
+            placeholder="0.00"
+            onChange={form.handleChange}
+            value={form.values.nftNumber}
+          />
+          {form.errors.nftNumber && form.touched.nftNumber && (
+            <span style={{ color: "red" }} className="text-xs">
+              {form.errors.nftNumber}
+            </span>
+          )}
+        </div>
+        <div>
+          <InputLabel
+            label="Address"
+            name="address"
+            type="text"
+            placeholder="ex"
+            onChange={form.handleChange}
+            value={form.values.address}
+          />
+          {form.errors.address && form.touched.address && (
+            <span style={{ color: "red" }} className="text-xs">
+              {form.errors.address}
+            </span>
+          )}
+        </div>
       </div>
 
       <button
