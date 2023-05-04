@@ -3,8 +3,9 @@ import Banner from '@/components/banner/Banner'
 import FormSection from '@/components/form-section/FormSection'
 import PerksSection from '@/components/perks/Perks'
 import TokenomicsSection from '@/components/tokenomics/Tokenomics'
-import RoadmapSection from '@/components/roadmap/Roadmap'
+//import RoadmapSection from '@/components/roadmap/Roadmap'
 import Exchange from "@/components/exchange/Exchange";
+import TaxBurnChart from '@/components/tax-burn-chart/TaxBurnChart'
 
 const montserrat = Montserrat({
 	subsets: ['latin', 'vietnamese'],
@@ -20,7 +21,8 @@ export default function Home() {
       </section>
       <PerksSection />
       <TokenomicsSection />
-      <RoadmapSection />
+      <TaxBurnChart/>
+      {/* <RoadmapSection /> */}
       <Exchange />
     </main>
   );
