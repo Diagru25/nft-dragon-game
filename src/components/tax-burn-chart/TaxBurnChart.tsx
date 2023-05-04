@@ -100,7 +100,7 @@ export default function TaxBurnChart() {
   };
 
   return (
-    <div className=" bg-primary-light py-4">
+    <div id="tax-burn" className=" bg-primary-light py-4">
       <div className="relative max-w-[1200px] w-full m-auto sm:hidden">
         <ResponsiveContainer width="100%" height={500}>
           <PieChart>
