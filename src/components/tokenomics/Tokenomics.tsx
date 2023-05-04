@@ -1,8 +1,8 @@
-import { Fragment } from 'react'
-import Section from '../common/Section'
+import { Fragment } from "react";
+import Section from "../common/Section";
 
 export default function Tokenomics() {
-	return (
+  return (
     <Fragment>
       <div
         id="tokenomics"
@@ -11,25 +11,25 @@ export default function Tokenomics() {
         <Section title="Tokenomics">
           <section>
             <p>
-              SHIBAI is the fundamental token within the AiChicken ecosystem. It
-              possesses powerful deflationary attributes and offers users the
+              It possesses powerful deflationary attributes and offers users the
               opportunity to generate passive income via staking, thereby
               establishing enduring value for the token.
             </p>
             <h3 className="text-md my-5 font-bold">
-              Total Supply : 210,000,000,000,000,000 tokens
+              Total Supply : 100,000,000,000,000,000 tokens
             </h3>
-            <h3 className="text-md my-5 font-bold">Token Symbol : $SHIBAI</h3>
+            <h3 className="text-md my-5 font-bold">Token Symbol : $AICHICK</h3>
             <h3 className="text-md my-2 font-bold">Token Allocation :</h3>
             <h3 className="text-md my-2 font-bold">
-              90% distributed as airdrop to eligible wallets
+              60% distributed as airdrop to AiChick OG NFT
             </h3>
             <h3 className="text-md my-2 font-bold">
-              10% DEX Liquidity and CEX Listing
+              25% DEX Liquidity and CEX Listing
             </h3>
+            <h3 className="text-md my-2 font-bold">15% for referral program</h3>
             <p>
-              Our tokenomics and airdrop eligibility criteria is fully explained
-              in ourwhitepaper
+              Tokens haven’t distributed via AiChick OG NFT and referral program
+              will be burned forever
             </p>
           </section>
         </Section>

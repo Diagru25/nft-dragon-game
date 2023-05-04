@@ -11,15 +11,15 @@ export default function Banner() {
       <h4 className="font-bold">
         The Community-inspired meme coin for arbitrum blockchain
       </h4>
-      <div className="flex gap-2 items-center text-transparent">
+      <div className="flex gap-2 items-center text-transparent sm:hidden">
         <CheckCircleIcon className="w-6 h-6 stroke-white" />
         <p className="my-4">Text 1</p>
       </div>
-      <div className="flex gap-2 items-center text-transparent">
+      <div className="flex gap-2 items-center text-transparent sm:hidden">
         <CheckCircleIcon className="w-6 h-6 stroke-white" />
         <p className="my-4">Text 2</p>
       </div>
-      <div className="flex gap-2 items-center text-transparent">
+      <div className="flex gap-2 items-center text-transparent sm:hidden">
         <CheckCircleIcon className="w-6 h-6 stroke-white" />
         <p className="my-4">Text 3</p>
       </div>
