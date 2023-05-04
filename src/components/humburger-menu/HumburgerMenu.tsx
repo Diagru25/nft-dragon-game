@@ -23,10 +23,9 @@ const HumburgerMenu: FC<Props> = ({ onClose }) => {
       label: "Tokenomics",
       value: "tokenomics",
     },
-
     {
-      label: "Roadmap",
-      value: "roadmap",
+      label: "Tax burn",
+      value: "tax-burn",
     },
   ];
 

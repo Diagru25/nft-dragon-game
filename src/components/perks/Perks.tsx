@@ -5,7 +5,7 @@ export default function PerksSection() {
   const perks: Array<{ title: string; description: string }> = [
     {
       title: "OwnerShip",
-      description: `By owning one of our 40000 AiShiba OG Collection, you automatically become an early member of #AiChick Community.
+      description: `By owning one of our 40000 AiChick OG Collection, you automatically become an early member of #AiChick Community.
       \nAll NFT holders are eligible for our upcoming airdrop and future events. Hurry up before sold out.`,
     },
 
