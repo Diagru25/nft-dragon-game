@@ -33,7 +33,7 @@ export default function FormSection() {
             } w-fit px-2 hover:cursor-pointer`}
             onClick={() => setActiveTab(tabValue[2])}
           >
-            ARB/OG CLAIM
+            CLAIM TOKEN
           </div>
         </div>
 
@@ -119,7 +119,7 @@ const FormTwo = () => {
           onChange={form.handleChange}
           value={form.values.nftNumber}
         />
-        {(form.errors.nftNumber && form.touched.nftNumber) && (
+        {form.errors.nftNumber && form.touched.nftNumber && (
           <span className=" text-xs" style={{ color: "red" }}>
             {form.errors.nftNumber}
           </span>
@@ -154,6 +154,10 @@ const FormOne = () => {
       form.resetForm();
     },
   });
+
+  const handleInvite = () => {
+    console.log("invite fnc");
+  }
 
   return (
     <div className="p-6">
@@ -194,13 +198,21 @@ const FormOne = () => {
           )}
         </div>
       </div>
+      <div className="flex justify-between sm:flex-col">
+        <button
+          className="mt-5 rounded-md  bg-sky-600 border px-4 py-2 hover:bg-sky-500"
+          onClick={form.submitForm}
+        >
+          CONNECT WALLET
+        </button>
 
-      <button
-        className="mt-5 rounded-md  bg-sky-600 border px-4 py-2 hover:bg-sky-500"
-        onClick={form.submitForm}
-      >
-        CONNECT WALLET
-      </button>
+        <button
+          className="mt-5 rounded-md  bg-sky-600 border px-4 py-2 hover:bg-sky-500"
+          onClick={handleInvite}
+        >
+          INVITE
+        </button>
+      </div>
     </div>
   );
 };
