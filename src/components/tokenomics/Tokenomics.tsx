@@ -16,19 +16,19 @@ export default function Tokenomics() {
               establishing enduring value for the token.
             </p>
             <h3 className="text-md my-5 font-bold">
-              Total Supply : 100,000,000,000,000,000 tokens
+              Total Supply : 100,000,000,000,000,000
             </h3>
             <h3 className="text-md my-5 font-bold">Token Symbol : $AICHICK</h3>
             <h3 className="text-md my-2 font-bold">Token Allocation :</h3>
             <h3 className="text-md my-2 font-bold">
-              60% distributed as airdrop to AiChick OG NFT
+              60% distributed as airdrop to AiChick OG NFTs Holder
             </h3>
             <h3 className="text-md my-2 font-bold">
               25% DEX Liquidity and CEX Listing
             </h3>
             <h3 className="text-md my-2 font-bold">15% for referral program</h3>
             <p>
-              Tokens haven’t distributed via AiChick OG NFT and referral program
+              Tokens haven’t distributed via AiChick OG NFTs and referral program
               will be burned forever
             </p>
           </section>

@@ -5,13 +5,13 @@ export default function PerksSection() {
   const perks: Array<{ title: string; description: string }> = [
     {
       title: "OwnerShip",
-      description: `By owning one of our 40000 AiChick OG Collection, you automatically become an early member of #AiChick Community.
+      description: `By owning one of our 40,000 AiChick OG Collection, you automatically become an early member of $AiChick Community.
       \nAll NFT holders are eligible for our upcoming airdrop and future events. Hurry up before sold out.`,
     },
 
     {
       title: "100% Community Owned",
-      description: `#AiChick is built different that is why we are allocating 100% of our tokens to the community to decide the value of the project.
+      description: `$AiChick is built different that is why we are allocating 100% of our tokens to the community to decide the value of the project.
     \nNOTE: NO TOKEN IS ALLOCATED TO TEAM`,
     },
 
@@ -21,7 +21,7 @@ export default function PerksSection() {
     },
 
     {
-      title: "Earn rewards for holding #AiChick token",
+      title: "Earn rewards for holding $AiChick token",
       description: `#ARB rewards will be distributed to top 500 holders weekly as a way to earn passive income.`,
     },
   ];
