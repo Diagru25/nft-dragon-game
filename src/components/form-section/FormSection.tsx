@@ -12,7 +12,6 @@ import {
   useWaitForTransaction,
   useContractRead,
 } from "wagmi";
-import { nftAddress } from "@/constants/nft.constant";
 import { useAccount } from "wagmi";
 import { validAddress } from "@/helpers/validate";
 import { toast } from "react-toastify";
@@ -20,7 +19,7 @@ import { toast } from "react-toastify";
 const tabValue = {
   1: "firstTab",
   2: "secondTab",
-};
+}; 
 
 export default function FormSection() {
   const router = useRouter();
@@ -34,7 +33,7 @@ export default function FormSection() {
     error: errorPrice,
     isSuccess: isHavePrice,
   } = useContractRead({
-    address: nftAddress,
+    address: "0x6DDeB5B75d16227855d877b0BD941b2AABf3E802",
     abi: nftABI,
     functionName: "getCurrentPrice",
   });
@@ -44,7 +43,7 @@ export default function FormSection() {
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: nftAddress,
+    address: "0x6DDeB5B75d16227855d877b0BD941b2AABf3E802",
     abi: nftABI,
     functionName: "mint",
     args: [refToken],
@@ -224,7 +223,7 @@ const FormOne: FC<PropsFormOne> = ({
   isMintSuccess,
 }) => {
   const { data: minted, isSuccess: isGetMintedSuccess } = useContractRead({
-    address: nftAddress,
+    address: "0x6DDeB5B75d16227855d877b0BD941b2AABf3E802",
     abi: nftABI,
     functionName: "getTotalMintedNft",
   });
