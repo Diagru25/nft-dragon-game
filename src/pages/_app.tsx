@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
         <ToastContainer
           position="top-right"
-          autoClose={5000}
+          autoClose={3000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -45,6 +45,7 @@ export default function App({ Component, pageProps }: AppProps) {
           pauseOnFocusLoss
           draggable
           pauseOnHover
+          limit={3}
           theme="light"
         />
       </Layout>

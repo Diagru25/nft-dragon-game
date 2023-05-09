@@ -1,4 +1,4 @@
-import { FC, Fragment, useState } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 import InputLabel from "../input-label/InputLabel";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { useFormik } from "formik";
@@ -11,6 +11,10 @@ import {
   useContractWrite,
   useWaitForTransaction,
   useContractRead,
+  UseContractReadConfig,
+  UsePrepareContractWriteConfig,
+  UseContractWriteConfig,
+  useNetwork,
 } from "wagmi";
 import { useAccount } from "wagmi";
 import { validAddress } from "@/helpers/validate";
@@ -19,13 +23,19 @@ import { toast } from "react-toastify";
 const tabValue = {
   1: "firstTab",
   2: "secondTab",
-}; 
+};
+
+const contractConfig = {
+  address: "0x6ddeb5b75d16227855d877b0bd941b2aabf3e802",
+  abi: nftABI,
+};
 
 export default function FormSection() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>(tabValue[1]); //firstTab, secondTab
-
   const refToken = validAddress(router.query.ref);
+
+  const { chain } = useNetwork();
 
   const {
     data: dataPrice,
@@ -33,39 +43,49 @@ export default function FormSection() {
     error: errorPrice,
     isSuccess: isHavePrice,
   } = useContractRead({
-    address: "0x6DDeB5B75d16227855d877b0BD941b2AABf3E802",
-    abi: nftABI,
+    ...contractConfig,
     functionName: "getCurrentPrice",
-  });
+  } as UseContractReadConfig);
 
   const {
     config,
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0x6DDeB5B75d16227855d877b0BD941b2AABf3E802",
-    abi: nftABI,
+    ...contractConfig,
     functionName: "mint",
     args: [refToken],
     overrides: {
       //@ts-ignore
       value: dataPrice?.toString(),
     },
-  });
+  } as UsePrepareContractWriteConfig);
 
-  const { data, error: errorWrite, isError, write } = useContractWrite(config);
+  const {
+    data,
+    error: mintError,
+    isError: isMintError,
+    write,
+  } = useContractWrite(config as UseContractWriteConfig);
 
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: data?.hash,
   });
 
   const handleMint = () => {
+    if (chain?.id !== 80001 && chain?.id !== 42161) {
+      return toast.error("Wrong chain! You must move to Arbitrum");
+    }
+    if (isPrepareError) {
+      //@ts-ignore
+     return toast.error(prepareError?.error?.data?.message || prepareError?.message);
+    }
+    if (isMintError) {
+      //@ts-ignore
+      return toast.error(mintError?.error?.data?.message || mintError?.message);
+    }
     if (isHavePrice) write?.();
   };
-
-  if (isSuccess) {
-    toast.success("Mint successfully!");
-  }
 
   return (
     <Fragment>
@@ -94,14 +114,14 @@ export default function FormSection() {
         </div>
 
         {activeTab === tabValue[1] ? (
-          <FormOne
-            writeFnc={handleMint}
-            isMintLoading={isLoading}
-            isMintSuccess={isSuccess}
-          />
+          <FormOne writeFnc={handleMint} isMintLoading={isLoading} />
         ) : (
           <FormTwo />
         )}
+        <div className={"text-2xl font-bold text-center text-primary"}>
+          {isSuccess && "Mint Successfully!"}
+          {isLoading && "Minting..."}
+        </div>
       </div>
     </Fragment>
   );
@@ -215,37 +235,23 @@ const FormTwo = () => {
 type PropsFormOne = {
   writeFnc: any;
   isMintLoading: boolean;
-  isMintSuccess: boolean;
 };
-const FormOne: FC<PropsFormOne> = ({
-  writeFnc,
-  isMintLoading,
-  isMintSuccess,
-}) => {
-  const { data: minted, isSuccess: isGetMintedSuccess } = useContractRead({
-    address: "0x6DDeB5B75d16227855d877b0BD941b2AABf3E802",
-    abi: nftABI,
-    functionName: "getTotalMintedNft",
-  });
+const FormOne: FC<PropsFormOne> = ({ writeFnc, isMintLoading }) => {
+  const [mintedValue, setMintedValue] = useState(0);
 
-  const { address, connector, isConnected } = useAccount();
-  //   const form = useFormik({
-  //     initialValues: {
-  //       nftNumber: "",
-  //       address: "",
-  //     },
-  //     validationSchema: Yup.object().shape({
-  //       nftNumber: Yup.number()
-  //         .required("Value is not Empty")
-  //         .moreThan(0, "Value must be greater than 0"),
-  //       address: Yup.string().required("Value is not empty"),
-  //     }),
-  //     onSubmit: (data) => {
-  //       //Code here
-  //       console.log(data);
-  //       form.resetForm();
-  //     },
-  //   });
+  const { refetch } = useContractRead({
+    ...contractConfig,
+    functionName: "getTotalMintedNft",
+    onSuccess(data) {
+      setMintedValue(Number(data));
+    },
+  } as UseContractReadConfig);
+
+  useEffect(() => {
+    refetch();
+  }, [isMintLoading, refetch]);
+
+  const { address, isConnected } = useAccount();
 
   const handleInvite = () => {
     if (isConnected) {
@@ -281,44 +287,15 @@ const FormOne: FC<PropsFormOne> = ({
         Price: 0.0006 ETH and increase 0.0001 for each 2,000 NFTs minted.
       </div>
       <div className="flex flex-col gap-6 mt-4">
-        <ProgressBar
-          minted={isGetMintedSuccess ? Number(minted) : 0}
-          total={40000}
-        />
-
-        {/* <div>
-          <InputLabel
-            label="Your Airdrop Allocation"
-            name="nftNumber"
-            placeholder="0.00"
-            onChange={form.handleChange}
-            value={form.values.nftNumber}
-          />
-          {form.errors.nftNumber && form.touched.nftNumber && (
-            <span style={{ color: "red" }} className="text-xs">
-              {form.errors.nftNumber}
-            </span>
-          )}
-        </div>
-        <div>
-          <InputLabel
-            label="Address"
-            name="address"
-            type="text"
-            placeholder="ex"
-            onChange={form.handleChange}
-            value={form.values.address}
-          />
-          {form.errors.address && form.touched.address && (
-            <span style={{ color: "red" }} className="text-xs">
-              {form.errors.address}
-            </span>
-          )}
-        </div> */}
+        <ProgressBar minted={mintedValue} total={40000} />
       </div>
       <div className="flex justify-between sm:flex-col">
         <button
-          className="mt-5 rounded-md bg-sky-600 border px-4 py-2 hover:bg-sky-500 hover:text-primary hover:border-primary hover:bg-primary-light"
+          className={`mt-5 rounded-md bg-sky-600 border px-4 py-2 ${
+            isMintLoading
+              ? "bg-gray"
+              : "hover:text-primary hover:border-primary hover:bg-primary-light"
+          }`}
           onClick={handleMint}
           disabled={isMintLoading}
         >
@@ -330,17 +307,7 @@ const FormOne: FC<PropsFormOne> = ({
         >
           INVITE
         </button>
-        {/* {isSuccess && (
-          <div>
-            Successfully minted your NFT!
-          </div>
-        )}
-        {(isPrepareError || isError) && (
-          <div>Error: {(prepareError || error)?.message}</div>
-        )} */}
       </div>
-
-      {isMintSuccess ? <div>Mint Successful!</div> : ""}
     </div>
   );
 };
