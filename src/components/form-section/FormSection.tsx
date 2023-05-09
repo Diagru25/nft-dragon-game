@@ -135,7 +135,7 @@ const FormTwo = () => {
   return (
     <div className="p-6">
       <h3 className="text-xl font-bold my-4">
-        Claim Airdrop for $AiChick OG NFTs
+        Claim $AiChick for OG NTFs Holder
       </h3>
       <h3 className="text-xl font-bold my-4 text-primary">Coming soon</h3>
     </div>
@@ -223,7 +223,7 @@ const FormOne: FC<PropsFormOne> = ({
   isMintLoading,
   isMintSuccess,
 }) => {
-  const { data: minted, isSuccess: isGetMintedSucess } = useContractRead({
+  const { data: minted, isSuccess: isGetMintedSuccess } = useContractRead({
     address: nftAddress,
     abi: nftABI,
     functionName: "getTotalMintedNft",
@@ -270,7 +270,7 @@ const FormOne: FC<PropsFormOne> = ({
     <div className="p-6">
       <div className="flex gap-2 items-center">
         <CheckCircleIcon className="w-6 h-6 stroke-black stroke-2" />
-        <p className="my-4 font-bold">AiChicken OG Collection NFT Holder</p>
+        <p className="my-4 font-bold">AiChicken OG Collection NFT</p>
       </div>
       <div className="h-8 sm:h-2"></div>
       <div className="my-4">
@@ -279,12 +279,13 @@ const FormOne: FC<PropsFormOne> = ({
       </div>
       <div className="my-1">1 OG NFT = 1,500,000,000,000 $AiChick.</div>
       <div className="my-1">
-        Price: 0.0006 ETH and increase 0.0001 for each 2000 NFTs minted.
+        Price: 0.0006 ETH and increase 0.0001 for each 2,000 NFTs minted.
       </div>
       <div className="flex flex-col gap-6 mt-4">
-        {isGetMintedSucess ? (
-          <ProgressBar minted={Number(minted)} total={40000} />
-        ) : null}
+        <ProgressBar
+          minted={isGetMintedSuccess ? Number(minted) : 0}
+          total={40000}
+        />
 
         {/* <div>
           <InputLabel
