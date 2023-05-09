@@ -1,0 +1,1 @@
+export const nftAddress = "0x6DDeB5B75d16227855d877b0BD941b2AABf3E802";

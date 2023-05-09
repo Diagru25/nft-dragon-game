@@ -57,7 +57,7 @@ export default function Exchange() {
             </a>
             |
             <a
-              href="#"
+              href="https://twitter.com/aichick_io"
               className="hover:cursor-pointer hover:text-primary"
               target="_blank"
             >

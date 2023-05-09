@@ -1,19 +1,18 @@
-import { Montserrat } from 'next/font/google'
-import Banner from '@/components/banner/Banner'
-import FormSection from '@/components/form-section/FormSection'
-import PerksSection from '@/components/perks/Perks'
-import TokenomicsSection from '@/components/tokenomics/Tokenomics'
-//import RoadmapSection from '@/components/roadmap/Roadmap'
+import { Montserrat } from "next/font/google";
+import Banner from "@/components/banner/Banner";
+import FormSection from "@/components/form-section/FormSection";
+import PerksSection from "@/components/perks/Perks";
+import TokenomicsSection from "@/components/tokenomics/Tokenomics";
 import Exchange from "@/components/exchange/Exchange";
-import TaxBurnChart from '@/components/tax-burn-chart/TaxBurnChart'
+import TaxBurnChart from "@/components/tax-burn-chart/TaxBurnChart";
 
 const montserrat = Montserrat({
-	subsets: ['latin', 'vietnamese'],
-	weight: 'variable',
-})
+  subsets: ["latin", "vietnamese"],
+  weight: "variable",
+});
 
 export default function Home() {
-	return (
+  return (
     <main className={`${montserrat.className} sm:mt-16`}>
       <section className="pb-10">
         <Banner />
@@ -21,7 +20,7 @@ export default function Home() {
       </section>
       <PerksSection />
       <TokenomicsSection />
-      <TaxBurnChart/>
+      <TaxBurnChart />
       {/* <RoadmapSection /> */}
       <Exchange />
     </main>
