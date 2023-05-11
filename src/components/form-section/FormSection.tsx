@@ -283,9 +283,6 @@ const FormOne: FC<PropsFormOne> = ({ writeFnc, isMintLoading }) => {
         supply of $AiChick.
       </div>
       <div className="my-1">1 OG NFT = 1,500,000,000,000 $AiChick.</div>
-      <div className="my-1">
-        Price: 0.0006 ETH and increase 0.0001 for each 2,000 NFTs minted.
-      </div>
       <div className="flex flex-col gap-6 mt-4">
         <ProgressBar minted={mintedValue} total={40000} />
       </div>
@@ -305,7 +302,7 @@ const FormOne: FC<PropsFormOne> = ({ writeFnc, isMintLoading }) => {
           className="mt-5 rounded-md bg-sky-600 border px-4 py-2 hover:bg-sky-500 hover:text-primary hover:border-primary hover:bg-primary-light"
           onClick={handleInvite}
         >
-          INVITE
+          INVITE 15%
         </button>
       </div>
     </div>
