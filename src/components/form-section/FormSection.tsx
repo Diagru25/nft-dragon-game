@@ -301,7 +301,7 @@ const FormOne: FC<PropsFormOne> = ({
   };
 
   const handleMint = () => {
-    if (isConnected) {
+    if (isConnected && !inputError) {
       writeFnc();
     }
   };
@@ -318,7 +318,7 @@ const FormOne: FC<PropsFormOne> = ({
         if (restAmountMint === 0) setInputError("You have minted 10/10");
         else
           setInputError(
-            `value must be greater than 0 and less than ${restAmountMint + 1}`
+            `value must be integer and greater than 0 and less than ${restAmountMint + 1}`
           );
         return;
       }
@@ -349,7 +349,7 @@ const FormOne: FC<PropsFormOne> = ({
       <div className="flex flex-col gap-6 mt-4">
         <ProgressBar minted={mintedValue.totalMinted} total={40000} />
       </div>
-      {(mintedValue.ownerMinted < 10 && isConnected) ? (
+      {mintedValue.ownerMinted < 10 && isConnected ? (
         <div className="mt-8 sm:mt-4">
           <InputLabel
             name="mintAmount"
@@ -381,8 +381,13 @@ const FormOne: FC<PropsFormOne> = ({
           {isMintLoading ? "MINTING..." : "MINT"}
         </button>
         <button
-          className="mt-5 rounded-md bg-sky-600 border px-4 py-2 hover:bg-sky-500 hover:text-primary hover:border-primary hover:bg-primary-light"
+          className={`mt-5 rounded-md bg-sky-600 border px-4 py-2 ${
+            mintedValue.ownerMinted < 1 || !isConnected
+              ? "bg-gray"
+              : "hover:text-primary hover:border-primary hover:bg-primary-light"
+          }`}
           onClick={handleInvite}
+          disabled={mintedValue.ownerMinted < 1 || !isConnected}
         >
           INVITE 15%
         </button>
