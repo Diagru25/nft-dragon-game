@@ -26,13 +26,14 @@ const tabValue = {
 };
 
 const contractConfig = {
-  address: "0x9776915175D495B0eE077DCEaDAbe9731F292fdD",
+  address: "0x860aC6C8ab4f5D8cAaDEAa79dD8165282b82fC5e",
   abi: nftABI,
 };
 
 export default function FormSection() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>(tabValue[1]); //firstTab, secondTab
+  const [mintAmount, setMintAmount] = useState<number>(1);
   const refToken = validAddress(router.query.ref);
 
   const { chain } = useNetwork();
@@ -45,6 +46,7 @@ export default function FormSection() {
   } = useContractRead({
     ...contractConfig,
     functionName: "getCurrentPrice",
+    args: [mintAmount],
   } as UseContractReadConfig);
 
   const {
@@ -54,7 +56,7 @@ export default function FormSection() {
   } = usePrepareContractWrite({
     ...contractConfig,
     functionName: "mint",
-    args: [refToken, 123],
+    args: [refToken, mintAmount],
     overrides: {
       //@ts-ignore
       value: dataPrice?.toString(),
@@ -73,18 +75,28 @@ export default function FormSection() {
   });
 
   const handleMint = () => {
+    console.log("nfisudhfs");
     if (chain?.id !== 80001 && chain?.id !== 42161) {
       return toast.error("Wrong chain! You must move to Arbitrum");
     }
     if (isPrepareError) {
       //@ts-ignore
-     return toast.error(prepareError?.error?.data?.message || prepareError?.message);
+      return toast.error(
+        //@ts-ignore
+        prepareError?.error?.data?.message || prepareError?.message
+      );
     }
     if (isMintError) {
+      console.log("nfisudhfs");
       //@ts-ignore
       return toast.error(mintError?.error?.data?.message || mintError?.message);
     }
-    if (isHavePrice) write?.();
+    if (isHavePrice) {
+      console.log("mint");
+      write?.();
+    } else {
+      console.log(errorPrice);
+    }
   };
 
   return (
@@ -114,7 +126,11 @@ export default function FormSection() {
         </div>
 
         {activeTab === tabValue[1] ? (
-          <FormOne writeFnc={handleMint} isMintLoading={isLoading} />
+          <FormOne
+            writeFnc={handleMint}
+            isMintLoading={isLoading}
+            handleChangeMintAmount={(value: number) => setMintAmount(value)}
+          />
         ) : (
           <FormTwo />
         )}
@@ -235,23 +251,40 @@ const FormTwo = () => {
 type PropsFormOne = {
   writeFnc: any;
   isMintLoading: boolean;
+  handleChangeMintAmount: (value: number) => void;
 };
-const FormOne: FC<PropsFormOne> = ({ writeFnc, isMintLoading }) => {
-  const [mintedValue, setMintedValue] = useState(0);
+const FormOne: FC<PropsFormOne> = ({
+  writeFnc,
+  isMintLoading,
+  handleChangeMintAmount,
+}) => {
+  const [mintedValue, setMintedValue] = useState<{
+    totalMinted: number;
+    ownerMinted: number;
+  }>({ totalMinted: 0, ownerMinted: 0 });
+  const [inputError, setInputError] = useState<string>("");
+  const [isConnected, setIsConnected] = useState<boolean>(false);
 
   const { refetch } = useContractRead({
     ...contractConfig,
-    functionName: "getTotalMintedNft",
-    onSuccess(data) {
-      setMintedValue(Number(data));
+    functionName: "getTotalMintedNftAndOfOwner",
+    onSuccess(data: any) {
+      const totalMinted = Number(data[0]);
+      const ownerMinted = Number(data[1]);
+      setMintedValue({ totalMinted, ownerMinted });
     },
   } as UseContractReadConfig);
+
+  const { address, isConnected: isConnectedAccount } = useAccount();
 
   useEffect(() => {
     refetch();
   }, [isMintLoading, refetch]);
 
-  const { address, isConnected } = useAccount();
+  useEffect(() => {
+    if (isConnectedAccount) setIsConnected(true);
+    else setIsConnected(false);
+  }, [isConnectedAccount]);
 
   const handleInvite = () => {
     if (isConnected) {
@@ -268,7 +301,31 @@ const FormOne: FC<PropsFormOne> = ({ writeFnc, isMintLoading }) => {
   };
 
   const handleMint = () => {
-    writeFnc();
+    if (isConnected) {
+      writeFnc();
+    }
+  };
+
+  const handleChangeMintInput = (e: any) => {
+    const value = Number(e.target.value);
+    const restAmountMint = 10 - mintedValue.ownerMinted;
+    if (!isNaN(value)) {
+      if (Number.isInteger(value) && value >= 1 && value <= restAmountMint) {
+        setInputError("");
+        handleChangeMintAmount(value);
+        return;
+      } else {
+        if (restAmountMint === 0) setInputError("You have minted 10/10");
+        else
+          setInputError(
+            `value must be greater than 0 and less than ${restAmountMint + 1}`
+          );
+        return;
+      }
+    } else {
+      setInputError("Value is not a number");
+      return;
+    }
   };
 
   return (
@@ -283,18 +340,43 @@ const FormOne: FC<PropsFormOne> = ({ writeFnc, isMintLoading }) => {
         supply of $AiChick.
       </div>
       <div className="my-1">1 OG NFT = 1,500,000,000,000 $AiChick.</div>
+      {isConnected && (
+        <div className="font-semibold text-sm mt-4 text-primary">
+          Owner minted: {mintedValue.ownerMinted}
+        </div>
+      )}
+
       <div className="flex flex-col gap-6 mt-4">
-        <ProgressBar minted={mintedValue} total={40000} />
+        <ProgressBar minted={mintedValue.totalMinted} total={40000} />
       </div>
+      {(mintedValue.ownerMinted < 10 && isConnected) ? (
+        <div className="mt-8 sm:mt-4">
+          <InputLabel
+            name="mintAmount"
+            label="Mint Amount"
+            placeholder="0"
+            onChange={handleChangeMintInput}
+            defaultValue={1}
+          />
+          {inputError && (
+            <span className=" text-xs" style={{ color: "red" }}>
+              {inputError}
+            </span>
+          )}
+        </div>
+      ) : null}
+
       <div className="flex justify-between sm:flex-col">
         <button
           className={`mt-5 rounded-md bg-sky-600 border px-4 py-2 ${
-            isMintLoading
+            isMintLoading || mintedValue.ownerMinted > 10 || !isConnected
               ? "bg-gray"
               : "hover:text-primary hover:border-primary hover:bg-primary-light"
           }`}
           onClick={handleMint}
-          disabled={isMintLoading}
+          disabled={
+            isMintLoading || mintedValue.ownerMinted > 10 || !isConnected
+          }
         >
           {isMintLoading ? "MINTING..." : "MINT"}
         </button>
