@@ -26,7 +26,7 @@ const tabValue = {
 };
 
 const contractConfig = {
-  address: "0x860aC6C8ab4f5D8cAaDEAa79dD8165282b82fC5e",
+  address: "0x67b92fD926F8b2FB58981946d491f256dF22D36D",
   abi: nftABI,
 };
 
@@ -75,7 +75,6 @@ export default function FormSection() {
   });
 
   const handleMint = () => {
-    console.log("nfisudhfs");
     if (chain?.id !== 80001 && chain?.id !== 42161) {
       return toast.error("Wrong chain! You must move to Arbitrum");
     }
@@ -87,15 +86,11 @@ export default function FormSection() {
       );
     }
     if (isMintError) {
-      console.log("nfisudhfs");
       //@ts-ignore
       return toast.error(mintError?.error?.data?.message || mintError?.message);
     }
     if (isHavePrice) {
-      console.log("mint");
       write?.();
-    } else {
-      console.log(errorPrice);
     }
   };
 
@@ -265,17 +260,18 @@ const FormOne: FC<PropsFormOne> = ({
   const [inputError, setInputError] = useState<string>("");
   const [isConnected, setIsConnected] = useState<boolean>(false);
 
+  const { address, isConnected: isConnectedAccount } = useAccount();
   const { refetch } = useContractRead({
     ...contractConfig,
-    functionName: "getTotalMintedNftAndOfOwner",
+    functionName: "getTotalMintedNftAndOfAddr",
+    args: [address],
     onSuccess(data: any) {
       const totalMinted = Number(data[0]);
       const ownerMinted = Number(data[1]);
+
       setMintedValue({ totalMinted, ownerMinted });
     },
   } as UseContractReadConfig);
-
-  const { address, isConnected: isConnectedAccount } = useAccount();
 
   useEffect(() => {
     refetch();
@@ -318,7 +314,9 @@ const FormOne: FC<PropsFormOne> = ({
         if (restAmountMint === 0) setInputError("You have minted 10/10");
         else
           setInputError(
-            `value must be integer and greater than 0 and less than ${restAmountMint + 1}`
+            `value must be integer and greater than 0 and less than ${
+              restAmountMint + 1
+            }`
           );
         return;
       }
@@ -369,13 +367,21 @@ const FormOne: FC<PropsFormOne> = ({
       <div className="flex justify-between sm:flex-col">
         <button
           className={`mt-5 rounded-md bg-sky-600 border px-4 py-2 ${
-            isMintLoading || inputError || mintedValue.ownerMinted >= 10 || !isConnected
+            isMintLoading ||
+            inputError ||
+            mintedValue.ownerMinted >= 10 ||
+            !isConnected
               ? "bg-gray"
               : "hover:text-primary hover:border-primary hover:bg-primary-light"
           }`}
           onClick={handleMint}
           disabled={
-            (isMintLoading || inputError || mintedValue.ownerMinted >= 10 || !isConnected) ? true : false
+            isMintLoading ||
+            inputError ||
+            mintedValue.ownerMinted >= 10 ||
+            !isConnected
+              ? true
+              : false
           }
         >
           {isMintLoading ? "MINTING..." : "MINT"}
