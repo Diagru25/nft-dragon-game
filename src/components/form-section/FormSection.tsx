@@ -26,7 +26,7 @@ const tabValue = {
 };
 
 const contractConfig = {
-  address: "0x6ddeb5b75d16227855d877b0bd941b2aabf3e802",
+  address: "0x9776915175D495B0eE077DCEaDAbe9731F292fdD",
   abi: nftABI,
 };
 
@@ -54,7 +54,7 @@ export default function FormSection() {
   } = usePrepareContractWrite({
     ...contractConfig,
     functionName: "mint",
-    args: [refToken],
+    args: [refToken, 123],
     overrides: {
       //@ts-ignore
       value: dataPrice?.toString(),
