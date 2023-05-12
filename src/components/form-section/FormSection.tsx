@@ -369,13 +369,13 @@ const FormOne: FC<PropsFormOne> = ({
       <div className="flex justify-between sm:flex-col">
         <button
           className={`mt-5 rounded-md bg-sky-600 border px-4 py-2 ${
-            isMintLoading || mintedValue.ownerMinted > 10 || !isConnected
+            isMintLoading || inputError || mintedValue.ownerMinted >= 10 || !isConnected
               ? "bg-gray"
               : "hover:text-primary hover:border-primary hover:bg-primary-light"
           }`}
           onClick={handleMint}
           disabled={
-            isMintLoading || mintedValue.ownerMinted > 10 || !isConnected
+            (isMintLoading || inputError || mintedValue.ownerMinted >= 10 || !isConnected) ? true : false
           }
         >
           {isMintLoading ? "MINTING..." : "MINT"}
