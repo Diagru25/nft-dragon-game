@@ -264,19 +264,28 @@ const FormOne: FC<PropsFormOne> = ({
   const { address, isConnected: isConnectedAccount } = useAccount();
   const { refetch } = useContractRead({
     ...contractConfig,
-    functionName: "getTotalMintedNftAndOfAddr",
+    functionName: "getTotalMintedNft",
+    onSuccess(data: any) {
+      const totalMinted = Number(data);
+
+      setMintedValue({ ...mintedValue, totalMinted });
+    },
+  } as UseContractReadConfig);
+
+  const { refetch: refetchTotalMintedOwner } = useContractRead({
+    ...contractConfig,
+    functionName: "getTotalMintedNftOfAddr",
     args: [address],
     onSuccess(data: any) {
-      const totalMinted = Number(data[0]);
-      const ownerMinted = Number(data[1]);
-
-      setMintedValue({ totalMinted, ownerMinted });
+      const ownerMinted = Number(data);
+      setMintedValue({ ...mintedValue, ownerMinted });
     },
   } as UseContractReadConfig);
 
   useEffect(() => {
     refetch();
-  }, [isMintLoading, refetch]);
+    refetchTotalMintedOwner();
+  }, [isMintLoading, refetch, refetchTotalMintedOwner]);
 
   useEffect(() => {
     if (isConnectedAccount) setIsConnected(true);
