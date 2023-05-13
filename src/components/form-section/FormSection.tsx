@@ -26,7 +26,7 @@ const tabValue = {
 };
 
 const contractConfig = {
-  address: "0x67b92fD926F8b2FB58981946d491f256dF22D36D",
+  address: "0x11aA6868444C6b9dDE17B490281976251aF773f0",
   abi: nftABI,
 };
 
@@ -37,6 +37,7 @@ export default function FormSection() {
   const refToken = validAddress(router.query.ref);
 
   const { chain } = useNetwork();
+  const { address } = useAccount();
 
   const {
     data: dataPrice,
@@ -46,7 +47,7 @@ export default function FormSection() {
   } = useContractRead({
     ...contractConfig,
     functionName: "getCurrentPrice",
-    args: [mintAmount],
+    args: [mintAmount, address],
   } as UseContractReadConfig);
 
   const {
