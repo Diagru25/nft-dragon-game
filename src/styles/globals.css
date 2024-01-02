@@ -3,100 +3,101 @@
 @tailwind utilities;
 
 @layer base {
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	p {
-		font-weight: inherit;
-	}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    font-weight: inherit;
+  }
 
-	h1 {
-		@apply text-h1 font-medium;
-	}
+  h1 {
+    @apply text-h1 font-medium;
+  }
 
-	h2 {
-		@apply text-h2 font-medium;
-	}
+  h2 {
+    @apply text-h2 font-medium;
+  }
 
-	h3 {
-		@apply text-h3 font-medium;
-	}
+  h3 {
+    @apply text-h3 font-medium;
+  }
 
-	h4 {
-		@apply text-h4 font-medium;
-	}
+  h4 {
+    @apply text-h4 font-medium;
+  }
 
-	h5 {
-		@apply text-h5 font-medium;
-	}
+  h5 {
+    @apply text-h5 font-medium;
+  }
 
-	h6 {
-		@apply text-h6 font-medium;
-	}
+  h6 {
+    @apply text-h6 font-medium;
+  }
 
-	p {
-		font-size: inherit;
-	}
+  p {
+    font-size: inherit;
+  }
 }
 
 @layer components {
-	.text-display-lg,
-	.text-display-md,
-	.text-display-sm,
-	.text-display-xs,
-	.text-h1,
-	.text-h2,
-	.text-h3,
-	.text-h4,
-	.text-h5,
-	.text-h6,
-	.text-label-sm,
-	.text-label-xs {
-		@apply font-medium;
-	}
+  .text-display-lg,
+  .text-display-md,
+  .text-display-sm,
+  .text-display-xs,
+  .text-h1,
+  .text-h2,
+  .text-h3,
+  .text-h4,
+  .text-h5,
+  .text-h6,
+  .text-label-sm,
+  .text-label-xs {
+    @apply font-medium;
+  }
 
-	.text-label-xl,
-	.text-label-lg,
-	.text-label-md {
-		@apply font-semibold;
-	}
+  .text-label-xl,
+  .text-label-lg,
+  .text-label-md {
+    @apply font-semibold;
+  }
 
-	.text-xl,
-	.text-lg,
-	.text-md,
-	.text-sm,
-	.text-xs {
-		@apply font-normal;
-	}
+  .text-xl,
+  .text-lg,
+  .text-md,
+  .text-sm,
+  .text-xs {
+    @apply font-normal;
+  }
 }
 
 :root {
-	--foreground-rgb: #07090d;
-	--background-start-rgb: 214, 219, 220;
-	--background-end-rgb: 255, 255, 255;
+  --foreground-rgb: #07090d;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 body {
-	@apply text-md h-full m-0 sm:overflow-auto md:overflow-auto bg-light text-secondary;
-	font-family: 'Chakra Petch', sans-serif;
+  @apply text-md h-full m-0 sm:overflow-auto md:overflow-auto;
+  font-family: "Chakra Petch", sans-serif;
+  background: url("https://coqminer.com/COQ%20Miner_files/background.c2b2d891.svg");
 }
 
 body * {
-	@apply outline-none;
+  @apply outline-none;
 }
 
 .overlay {
-	position: absolute;
-	z-index: 2;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: 0.45rem;
-	width: 100vw;
-	height: 100vh;
-	pointer-events: auto;
-	background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0.45rem;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.5);
 }

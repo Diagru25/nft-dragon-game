@@ -5,7 +5,7 @@ import { Fragment } from 'react'
 export default function Layout(props: any) {
 	return (
 		<Fragment>
-			<Header />
+			{/* <Header /> */}
 			<Fragment>{props.children}</Fragment>
 			<Footer />
 		</Fragment>

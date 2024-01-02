@@ -66,7 +66,7 @@ function Header() {
             <Image src={img} alt="img" width={60} height={60} />
           </div>
           <div className="flex items-center gap-8 pr-4">
-            <nav className="flex items-center gap-3">
+            {/* <nav className="flex items-center gap-3">
               {navLinks.map((link) => (
                 <div
                   key={link.value}
@@ -76,7 +76,7 @@ function Header() {
                   {link.label}
                 </div>
               ))}
-            </nav>
+            </nav> */}
             <ButtonConnectWallet />
           </div>
         </section>
