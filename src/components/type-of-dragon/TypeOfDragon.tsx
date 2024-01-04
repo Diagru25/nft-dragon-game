@@ -1,30 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@mantine/core";
-import { LOCAL_STORAGE_TYPE_DRAGON, TYPE_OF_DRAGON } from "@/constants/common";
+import { TYPE_OF_DRAGON } from "@/constants/common";
+import { useThemeContext } from "@/context/app";
+const getNameDragon = (data: string) => {
+  if (!data) return "No dragon";
 
+  const foundObj = TYPE_OF_DRAGON.find((el) => el.matic === data);
+
+  if (foundObj) return foundObj.name;
+  else return "No Dragon";
+};
 const TypeOfDragon = () => {
-  const [nameDragon, setNameDragon] = useState("No dragon");
+  //@ts-ignore
+  const { typeOfDragon } = useThemeContext();
 
-  const getNameDragon = (data: string) => {
-    if (!data) return "No dragon";
-
-    const foundObj = TYPE_OF_DRAGON.find((el) => el.matic === data);
-
-    if (foundObj) return foundObj.name;
-    else return "No Dragon";
-  };
-
-  useEffect(() => {
-    const valueTypeDragon = localStorage.getItem(LOCAL_STORAGE_TYPE_DRAGON);
-    if (valueTypeDragon) {
-      const _name = getNameDragon(valueTypeDragon);
-      setNameDragon(_name);
-    }
-  }, []);
   return (
     <>
       <Button variant="outline">
-        <p className="text-neutral-200">{nameDragon}</p>
+        <p className="text-neutral-200">{getNameDragon(typeOfDragon)}</p>
       </Button>
     </>
   );

@@ -15,6 +15,7 @@ import {
   usePrepareContractWrite,
   useWaitForTransaction,
 } from "wagmi";
+import { useThemeContext } from "@/context/app";
 
 const Feed: FC<{
   className: string;
@@ -24,8 +25,9 @@ const Feed: FC<{
   const router = useRouter();
   const refToken: any = validAddress(router.query.ref);
   const [opened, { open, close }] = useDisclosure(false);
-  const [selectedValueType, setSelectedValueType] = useState("0");
-  const [valueType, setValueType] = useState("20000000000");
+
+  //@ts-ignore
+  const { typeOfDragon, setTypeOfDragon } = useThemeContext();
 
   const { address, isConnected: isConnectedAccount } = useAccount();
 
@@ -33,14 +35,13 @@ const Feed: FC<{
     config,
     error: prepareError,
     isError: isPrepareError,
-    refetch,
   } = usePrepareContractWrite({
     ...contractConfig,
     functionName: "buyDragon",
     args: [refToken || address],
     overrides: {
       //@ts-ignore
-      value: formatValueContract(selectedValueType),
+      value: formatValueContract(typeOfDragon),
     },
   } as UsePrepareContractWriteConfig);
 
@@ -81,21 +82,15 @@ const Feed: FC<{
     }
   }, [isSuccess]);
 
-  useEffect(() => {
-    const data = localStorage.getItem(LOCAL_STORAGE_TYPE_DRAGON);
-    setSelectedValueType(data || "");
-  }, []);
-
   const handleOnClick = () => {
-    if (isConnectedAccount && selectedValueType) {
+    if (isConnectedAccount && typeOfDragon) {
       handleFeed();
       close();
     }
   };
 
   const handleCheckBoxChange = (value: any) => {
-    setSelectedValueType(value);
-    setValueType(formatValueContract(value));
+    setTypeOfDragon(value);
     localStorage.setItem(LOCAL_STORAGE_TYPE_DRAGON, value);
   };
 
@@ -119,7 +114,7 @@ const Feed: FC<{
                 key={idx}
                 label={item.label}
                 value={item.matic}
-                checked={selectedValueType === item.matic ? true : false}
+                checked={typeOfDragon === item.matic ? true : false}
                 onChange={(e) => handleCheckBoxChange(e.target.value)}
               />
             ))}
