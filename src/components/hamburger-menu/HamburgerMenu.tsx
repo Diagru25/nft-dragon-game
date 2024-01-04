@@ -7,7 +7,7 @@ interface INavLink {
 type Props = {
   onClose: () => void;
 };
-const HumburgerMenu: FC<Props> = ({ onClose }) => {
+const HamburgerMenu: FC<Props> = ({ onClose }) => {
   const navLinks: Array<INavLink> = [
     {
       label: "Home",
@@ -63,4 +63,4 @@ const HumburgerMenu: FC<Props> = ({ onClose }) => {
   );
 };
 
-export default HumburgerMenu;
+export default HamburgerMenu;

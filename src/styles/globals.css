@@ -79,10 +79,15 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+html {
+  @apply h-full;
+}
+
 body {
-  @apply text-md h-full m-0 sm:overflow-auto md:overflow-auto;
+  @apply text-md min-h-full m-0 sm:overflow-auto md:overflow-auto;
   font-family: "Chakra Petch", sans-serif;
-  background: url("https://coqminer.com/COQ%20Miner_files/background.c2b2d891.svg");
+  background: url("../assets/dragon.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 body * {

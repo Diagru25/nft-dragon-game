@@ -1,30 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import CopyIcon from "../icon/Copy";
+import { toast } from "react-toastify";
 
 const ReferralLink = () => {
+  const [refLink] = useState("https***D2f6");
+
+  const handleCopy = (link: string) => {
+    const message = `Copy referral code ${link} success`;
+    toast.success(message, {});
+  };
+
   return (
-    <div
-      className="flex flex-col items-center justify-center p-4 gap-4  border-2 border-yellow-950 rounded-2xl"
-      style={{
-        margin: "0 8%",
-      }}
-    >
-      <h5 className="text-2xl">Referral Link</h5>
-      <div className="py-2 px-3 outline-none text-xs font-light border border-black bg-white">
-        https://coqminer.com/?ref=0x06BA7A80F11BC30aDAc7519049d9Fe9b7673D2f6
-      </div>
+    <div className="flex items-center justify-center px-4 gap-4 bg-zinc-900 rounded-2xl h-10 overflow-hidden">
+      <h5 className="text-xs">{refLink}</h5>
 
       <button
         type="button"
-        disabled
-        className="w-full p-4 bg-yellow-950 rounded-xl text-yellow-600"
+        onClick={() => handleCopy(refLink)}
+        className="bg-transparent outline-none rounded-full p-1 hover:bg-white hover:bg-opacity-50"
       >
-        COPY TO CLIPBOARD
+        <CopyIcon className="w-4 h-4" />
       </button>
-
-      <div>
-        Earn 12% of the BNB used to compound from anyone who uses your referral
-        link
-      </div>
     </div>
   );
 };
