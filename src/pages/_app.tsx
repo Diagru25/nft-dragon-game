@@ -23,6 +23,8 @@ import { ModalsProvider } from "@mantine/modals";
 const chains = [arbitrum, mainnet, polygon, polygonMumbai, bscTestnet];
 const projectId = "3efa42884d756748bc7e374d7b3499ac";
 
+import "@mantine/core/styles.css";
+
 const { provider } = configureChains(chains, [w3mProvider({ projectId })]);
 const wagmiClient = createClient({
   autoConnect: true,
