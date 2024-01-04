@@ -1,6 +1,6 @@
 export const validAddress = (ref: any) => {
-    const reg = new RegExp("^0x[a-fA-F0-9]{40}$");
-    const isValid = reg.test(ref);
+  const reg = new RegExp("^0x[a-fA-F0-9]{40}$");
+  const isValid = reg.test(ref);
 
-    return isValid ?  ref : "0x0000000000000000000000000000000000000000"
-}
+  return isValid ? ref : "";
+};

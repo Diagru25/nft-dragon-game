@@ -2,6 +2,7 @@ import React, { ChangeEvent } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Button } from "@mantine/core";
 import { Checkbox, Stack } from "@mantine/core";
+import { useThemeContext } from "../../context/app";
 
 const TypeOfDragon = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -36,12 +37,16 @@ const TypeOfDragon = () => {
     console.log(e);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    close();
+  };
+
+  const { typeOfDragon, setTypeOfDragon }: any = useThemeContext();
 
   return (
     <>
       <Modal opened={opened} onClose={close} title="Type of Dragon" centered>
-        <div className="p-4 flex flex-col gap-2">
+        <div className="flex flex-col gap-2 p-4">
           <Stack>
             {data.map((item, idx) => (
               <Checkbox
@@ -60,6 +65,7 @@ const TypeOfDragon = () => {
         </div>
       </Modal>
 
+      <div>{typeOfDragon}</div>
       <Button variant="outline" onClick={open}>
         <p className="text-neutral-200">Type of Dragons</p>
       </Button>

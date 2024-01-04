@@ -1,15 +1,24 @@
 import React, { FC } from "react";
 import { toast } from "react-toastify";
+import { useAccount } from "wagmi";
 
-const Feed: FC<{ className: string; style: object }> = ({
-  className,
-  style,
-}) => {
+const Feed: FC<{
+  className: string;
+  style: object;
+  writeFnc: any;
+  isFeedLoading: boolean;
+  //handleChangeMintAmount: (value: number) => void;
+}> = ({ className, style, writeFnc, isFeedLoading }) => {
+  const { address, isConnected: isConnectedAccount } = useAccount();
+
   const handleOnClick = () => {
-    toast.success("Feed success");
+    if (isConnectedAccount) writeFnc();
+    //toast.success("Feed success");
   };
 
-  return (
+  return isFeedLoading ? (
+    <div>Loading</div>
+  ) : (
     <button
       type="button"
       style={style}
