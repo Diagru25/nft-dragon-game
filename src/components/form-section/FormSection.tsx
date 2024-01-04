@@ -60,7 +60,7 @@ export default function FormSection() {
     args: [refToken, mintAmount],
     overrides: {
       //@ts-ignore
-      value: dataPrice?.toString(),
+      value: dataPrice?.toString(), //"2000000000000000000000000"
     },
   } as UsePrepareContractWriteConfig);
 
@@ -97,8 +97,8 @@ export default function FormSection() {
 
   return (
     <Fragment>
-      <div className="m-auto p-10 max-w-3xl w-full bg-light rounded-2xl drop-shadow-2xl">
-        <div className="border-b border-solid border-primary-light flex gap-5 w-full mb-2">
+      <div className="w-full max-w-3xl p-10 m-auto bg-light rounded-2xl drop-shadow-2xl">
+        <div className="flex w-full gap-5 mb-2 border-b border-solid border-primary-light">
           <div
             className={` ${
               activeTab === tabValue[1]
@@ -165,34 +165,34 @@ const FormTwo = () => {
 
   return (
     <div className="p-6">
-      <h3 className="text-xl font-bold my-4">
+      <h3 className="my-4 text-xl font-bold">
         Claim $AiChick for OG NTFs Holder
       </h3>
-      <h3 className="text-xl font-bold my-4 text-primary">Coming soon</h3>
+      <h3 className="my-4 text-xl font-bold text-primary">Coming soon</h3>
     </div>
   );
 
   return (
     <div className="p-6">
-      <h3 className="text-xl font-bold my-4">
+      <h3 className="my-4 text-xl font-bold">
         Claim Airdrop for $AiChick OG NFTs
       </h3>
-      {/* <p className="font-light my-4">Who is eligible??</p>
-      <div className="flex gap-2 items-center">
+      {/* <p className="my-4 font-light">Who is eligible??</p>
+      <div className="flex items-center gap-2">
         <CheckCircleIcon className="w-6 h-6 stroke-black" />
         <p className="my-3 font-bold">Early Birds</p>
       </div>
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <CheckCircleIcon className="w-6 h-6 stroke-black" />
         <p className="my-3 font-bold">Arb Claimooorssss</p>
       </div>
-      <p className="font-light mb-2 text-gray-500">Choose A Side</p>
-      <div className="flex gap-4 font-light pb-4">
+      <p className="mb-2 font-light text-gray-500">Choose A Side</p>
+      <div className="flex gap-4 pb-4 font-light">
         <div className="flex items-center gap-2">
           <input
             type="radio"
             checked={form.values.selectedType === valueRadio[1] ? true : false}
-            className="h-5 w-5"
+            className="w-5 h-5"
             onChange={(e) => {
               const checked = e.target.checked;
               if (checked) form.setFieldValue("selectedType", valueRadio[1]);
@@ -204,7 +204,7 @@ const FormTwo = () => {
           <input
             type="radio"
             checked={form.values.selectedType === valueRadio[2] ? true : false}
-            className="h-5 w-5"
+            className="w-5 h-5"
             onChange={(e) => {
               const checked = e.target.checked;
               if (checked) form.setFieldValue("selectedType", valueRadio[2]);
@@ -213,7 +213,7 @@ const FormTwo = () => {
           <span>Arb Claimooorssss</span>
         </div>
         {form.errors.selectedType && (
-          <span className="text-red-500 text-xs">
+          <span className="text-xs text-red-500">
             {form.errors.selectedType}
           </span>
         )}
@@ -228,14 +228,14 @@ const FormTwo = () => {
           value={form.values.nftNumber}
         />
         {form.errors.nftNumber && form.touched.nftNumber && (
-          <span className=" text-xs" style={{ color: "red" }}>
+          <span className="text-xs " style={{ color: "red" }}>
             {form.errors.nftNumber}
           </span>
         )}
       </div>
 
       <button
-        className="mt-5 rounded-md  bg-sky-600 border px-4 py-2 hover:bg-sky-500"
+        className="px-4 py-2 mt-5 border rounded-md bg-sky-600 hover:bg-sky-500"
         onClick={form.submitForm}
       >
         CONNECT WALLET
@@ -338,8 +338,8 @@ const FormOne: FC<PropsFormOne> = ({
 
   return (
     <div className="p-6">
-      <div className="flex gap-2 items-center">
-        <CheckCircleIcon className="w-6 h-6 stroke-black stroke-2" />
+      <div className="flex items-center gap-2">
+        <CheckCircleIcon className="w-6 h-6 stroke-2 stroke-black" />
         <p className="my-4 font-bold">AiChicken OG Collection NFT</p>
       </div>
       <div className="h-8 sm:h-2"></div>
@@ -349,7 +349,7 @@ const FormOne: FC<PropsFormOne> = ({
       </div>
       <div className="my-1">1 OG NFT = 1,500,000,000,000 $AiChick.</div>
       {isConnected && (
-        <div className="font-semibold text-sm mt-4 text-primary">
+        <div className="mt-4 text-sm font-semibold text-primary">
           Owner minted: {mintedValue.ownerMinted}
         </div>
       )}
@@ -367,7 +367,7 @@ const FormOne: FC<PropsFormOne> = ({
             defaultValue={1}
           />
           {inputError && (
-            <span className=" text-xs" style={{ color: "red" }}>
+            <span className="text-xs " style={{ color: "red" }}>
               {inputError}
             </span>
           )}

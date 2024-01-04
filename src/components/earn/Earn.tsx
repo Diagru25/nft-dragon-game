@@ -3,13 +3,20 @@ import useToggle from "@/hooks/useToggle";
 import EyeCloseIcon from "../icon/EyeClose";
 import EyeOpenIcon from "../icon/EyeOpen";
 import { FC, useEffect, useState } from "react";
-import { UseContractReadConfig, useContractRead } from "wagmi";
+import {
+  UseContractReadConfig,
+  UseContractWriteConfig,
+  UsePrepareContractWriteConfig,
+  useContractRead,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
+import { contractConfig } from "@/constants/nft.constant";
+import { toast } from "react-toastify";
+import { numberWithCommas } from "@/helpers/string";
 
-const Earn: FC<{ contractConfig: any; address: any; isFeedLoading: any }> = ({
-  contractConfig,
-  address,
-  isFeedLoading,
-}) => {
+const Earn: FC<{ chain: any; address: any }> = ({ chain, address }) => {
   const { refetch } = useContractRead({
     ...contractConfig,
     functionName: "calculateReward",
@@ -41,8 +48,52 @@ const Earn: FC<{ contractConfig: any; address: any; isFeedLoading: any }> = ({
   };
 
   useEffect(() => {
-    refetch();
-  }, [isFeedLoading, refetch]);
+    const interval = setInterval(() => refetch(), 1000);
+
+    return () => clearInterval(interval);
+  }, [refetch]);
+
+  //claim
+  const {
+    config: configClaim,
+    error: prepareClaimError,
+    isError: isPrepareClaimError,
+  } = usePrepareContractWrite({
+    ...contractConfig,
+    functionName: "claimReward",
+  } as UsePrepareContractWriteConfig);
+  const {
+    data: dataClaim,
+    error: claimError,
+    isError: isClaimError,
+    write: writeClaim,
+  } = useContractWrite(configClaim as UseContractWriteConfig);
+
+  const { isLoading: isLoadingClaim, isSuccess: isSuccessClaim } =
+    useWaitForTransaction({
+      hash: dataClaim?.hash,
+    });
+
+  const claimReward = () => {
+    if (chain?.id !== 80001 && chain?.id !== 137) {
+      return toast.error("Wrong chain! You must move to Polygon");
+    }
+    if (isPrepareClaimError) {
+      //@ts-ignore
+      return toast.error(
+        //@ts-ignore
+        prepareClaimError?.error?.data?.message || prepareClaimError?.message
+      );
+    }
+
+    writeClaim?.();
+  };
+
+  useEffect(() => {
+    if (isSuccessClaim) {
+      toast.success("Claim reward success!");
+    }
+  }, [isSuccessClaim]);
 
   return (
     <div
@@ -75,7 +126,7 @@ const Earn: FC<{ contractConfig: any; address: any; isFeedLoading: any }> = ({
       <div className="flex items-center justify-between text-xs ">
         <p className="text-neutral-400">Total Matic</p>
         <p className="font-semibold text-neutral-200">
-          {toggleEye ? MASK : earn.totalMatic}&nbsp;
+          {toggleEye ? MASK : numberWithCommas(earn.totalMatic)}&nbsp;
           <b>{MATIC}</b>
         </p>
       </div>
@@ -83,7 +134,7 @@ const Earn: FC<{ contractConfig: any; address: any; isFeedLoading: any }> = ({
       <div className="flex items-center justify-between text-xs ">
         <p className="text-neutral-400">Total Matic By Ref</p>
         <p className="font-semibold text-neutral-200">
-          {toggleEye ? MASK : earn.refMatic}&nbsp;
+          {toggleEye ? MASK : numberWithCommas(earn.refMatic)}&nbsp;
           <b>{MATIC}</b>
         </p>
       </div>
@@ -91,10 +142,17 @@ const Earn: FC<{ contractConfig: any; address: any; isFeedLoading: any }> = ({
       <div className="flex items-center justify-between text-xs ">
         <p className="text-neutral-400">Total Matic By Invest</p>
         <p className="font-semibold text-neutral-200">
-          {toggleEye ? MASK : earn.investMatic}&nbsp;
+          {toggleEye ? MASK : numberWithCommas(earn.investMatic)}&nbsp;
           <b>{MATIC}</b>
         </p>
       </div>
+
+      <button
+        onClick={claimReward}
+        className={`h-10 outline-none text-neutral-200 bg-sky-600 rounded-lg border-none px-4 py-2 hover:bg-opacity-90`}
+      >
+        Claim Reward
+      </button>
     </div>
   );
 };

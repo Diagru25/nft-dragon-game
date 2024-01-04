@@ -1,73 +1,30 @@
-import React, { ChangeEvent } from "react";
-import { useDisclosure } from "@mantine/hooks";
-import { Modal, Button } from "@mantine/core";
-import { Checkbox, Stack } from "@mantine/core";
-import { useThemeContext } from "../../context/app";
+import React, { useEffect, useState } from "react";
+import { Button } from "@mantine/core";
+import { LOCAL_STORAGE_TYPE_DRAGON, TYPE_OF_DRAGON } from "@/constants/common";
 
 const TypeOfDragon = () => {
-  const [opened, { open, close }] = useDisclosure(false);
-  const data = [
-    {
-      label: "Normal dragon 50 MATIC - 3% per day",
-      value: 1,
-    },
+  const [nameDragon, setNameDragon] = useState("No dragon");
 
-    {
-      label: "Normal dragon 100 MATIC - 3.5% per day",
-      value: 2,
-    },
+  const getNameDragon = (data: string) => {
+    if (!data) return "No dragon";
 
-    {
-      label: "Normal dragon 250 MATIC - 4% per day",
-      value: 3,
-    },
+    const foundObj = TYPE_OF_DRAGON.find((el) => el.matic === data);
 
-    {
-      label: "Normal dragon 500 MATIC - 4.5% per day",
-      value: 4,
-    },
-
-    {
-      label: "Normal dragon 1000 MATIC - 5% per day",
-      value: 5,
-    },
-  ];
-
-  const handleChange = (e: string) => {
-    console.log(e);
+    if (foundObj) return foundObj.name;
+    else return "No Dragon";
   };
 
-  const handleSubmit = () => {
-    close();
-  };
-
-  const { typeOfDragon, setTypeOfDragon }: any = useThemeContext();
-
+  useEffect(() => {
+    const valueTypeDragon = localStorage.getItem(LOCAL_STORAGE_TYPE_DRAGON);
+    if (valueTypeDragon) {
+      const _name = getNameDragon(valueTypeDragon);
+      setNameDragon(_name);
+    }
+  }, []);
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Type of Dragon" centered>
-        <div className="flex flex-col gap-2 p-4">
-          <Stack>
-            {data.map((item, idx) => (
-              <Checkbox
-                key={idx}
-                label={item.label}
-                value={item.value}
-                onChange={(e) => handleChange(e.target.value)}
-              />
-            ))}
-          </Stack>
-        </div>
-        <div className="flex items-center justify-between">
-          <Button type="button" onClick={handleSubmit} className="ml-auto">
-            Confirm
-          </Button>
-        </div>
-      </Modal>
-
-      <div>{typeOfDragon}</div>
-      <Button variant="outline" onClick={open}>
-        <p className="text-neutral-200">Type of Dragons</p>
+      <Button variant="outline">
+        <p className="text-neutral-200">{nameDragon}</p>
       </Button>
     </>
   );

@@ -18,7 +18,7 @@ function Header() {
   const navLinks: Array<INavLink> = [
     {
       label: "Docs",
-      value: "docs",
+      value: "https://polyragon-organization.gitbook.io/polyragon/",
     },
   ];
 
@@ -26,28 +26,33 @@ function Header() {
     setToggleMenu(!toggleMenu);
   };
 
-  const handleMoveToDiv = (id: string) => {
-    if (id === "home") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    } else {
-      const elem = document.getElementById(id);
-      const yOffset = -60;
-      if (elem) {
-        const y =
-          elem.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  const handleMoveToDiv = (value: string) => {
+    const a = document.createElement("a");
+    a.href = value;
+    a.target = "_blank";
+    a.click();
+    a.remove();
+    // if (id === "home") {
+    //   window.scrollTo({
+    //     top: 0,
+    //     behavior: "smooth",
+    //   });
+    // } else {
+    //   const elem = document.getElementById(id);
+    //   const yOffset = -60;
+    //   if (elem) {
+    //     const y =
+    //       elem.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
-    }
+    //     window.scrollTo({ top: y, behavior: "smooth" });
+    //   }
+    // }
   };
 
   return (
     <Fragment>
-      <section className="sm:hidden sticky top-0 left-0 w-full items-center py-2 bg-light z-50 shadow-primary-light ml-auto text-white bg-orange-900 bg-opacity-30">
-        <section className="flex container mx-auto justify-end">
+      <section className="sticky top-0 left-0 z-50 items-center w-full py-2 ml-auto text-white bg-orange-900 sm:hidden bg-light shadow-primary-light bg-opacity-30">
+        <section className="container flex justify-end mx-auto">
           <div className="flex items-center gap-8 pr-4">
             <nav className="flex items-center gap-2">
               <TVL />
@@ -70,10 +75,10 @@ function Header() {
         </section>
       </section>
 
-      <div className="sm:block hidden fixed w-screen top-0 left-0 z-50">
+      <div className="fixed top-0 left-0 z-50 hidden w-screen sm:block">
         {toggleMenu && <div className="overlay" />}
 
-        <div className="flex justify-between sticky w-full items-center py-2 bg-light z-50 shadow-primary-light px-5">
+        <div className="sticky z-50 flex items-center justify-between w-full px-5 py-2 bg-light shadow-primary-light">
           <ButtonConnectWallet />
           <button onClick={handleToggleMenu}>
             {toggleMenu ? <CloseIcon /> : <MenuIcon />}
