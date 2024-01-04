@@ -19,6 +19,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
+
 const chains = [arbitrum, mainnet, polygon, polygonMumbai, bscTestnet];
 const projectId = "3efa42884d756748bc7e374d7b3499ac";
 

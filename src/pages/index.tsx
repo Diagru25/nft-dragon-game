@@ -2,11 +2,17 @@ import Earn from "@/components/earn/Earn";
 import Feed from "@/components/feed/Feed";
 import { Montserrat } from "next/font/google";
 import Head from "next/head";
+import { nftABI } from "@/constants/abi";
 
 const montserrat = Montserrat({
   subsets: ["latin", "vietnamese"],
   weight: "variable",
 });
+
+const contractConfig = {
+  address: "0x11aA6868444C6b9dDE17B490281976251aF773f0",
+  abi: nftABI,
+};
 
 export default function Home() {
   return (
