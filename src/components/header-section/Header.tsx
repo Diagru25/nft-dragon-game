@@ -6,6 +6,7 @@ import MenuIcon from "../icon/Menu";
 import CloseIcon from "../icon/Close";
 import ReferralLink from "../referral-link/ReferralLink";
 import TVL from "../tvl/TVL";
+import TypeOfDragon from "../type-of-dragon/TypeOfDragon";
 
 interface INavLink {
   label: string;
@@ -15,11 +16,6 @@ interface INavLink {
 function Header() {
   const [toggleMenu, setToggleMenu] = useToggle(false);
   const navLinks: Array<INavLink> = [
-    {
-      label: "Type of Dragon",
-      value: "typeOfDragon",
-    },
-
     {
       label: "Docs",
       value: "docs",
@@ -65,6 +61,9 @@ function Header() {
                 </div>
               ))}
             </nav>
+
+            <TypeOfDragon />
+
             <ReferralLink />
             <ButtonConnectWallet />
           </div>

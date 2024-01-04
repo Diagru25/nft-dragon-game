@@ -84,7 +84,7 @@ html {
 }
 
 body {
-  @apply text-md min-h-full m-0 sm:overflow-auto md:overflow-auto;
+  @apply text-md min-h-full m-0;
   font-family: "Chakra Petch", sans-serif;
   background: url("../assets/dragon.jpg") no-repeat center center fixed;
   background-size: cover;
