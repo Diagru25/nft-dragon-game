@@ -5,7 +5,7 @@ import { validAddress } from "@/helpers/validate";
 import { Button, Checkbox, Modal, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/router";
-import React, { FC, Fragment, useEffect, useState } from "react";
+import React, { FC, Fragment, useEffect } from "react";
 import { toast } from "react-toastify";
 import {
   UseContractWriteConfig,
