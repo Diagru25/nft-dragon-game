@@ -90,6 +90,7 @@ const Feed: FC<{
   };
 
   const handleCheckBoxChange = (value: any) => {
+    console.log(typeof value);
     setTypeOfDragon(value);
     localStorage.setItem(LOCAL_STORAGE_TYPE_DRAGON, value);
   };
@@ -99,11 +100,13 @@ const Feed: FC<{
       <button
         type="button"
         style={style}
-        className={`${className} h-10 outline-none text-neutral-200 bg-sky-600 rounded-lg border-none px-4 py-2 hover:bg-opacity-90`}
+        className={`${className} pulse-button  `}
         onClick={open}
         disabled={isLoading ? true : false}
       >
-        {isLoading ? "Loading..." : "Feed the dragon"}
+        <span className="whitespace-pre-line">
+          {isLoading ? "Loading..." : "Feed \nthe dragon"}
+        </span>
       </button>
 
       <Modal opened={opened} onClose={close} title="Type of Dragon" centered>

@@ -36,7 +36,7 @@ export default function Home() {
           <Earn chain={chain} address={address} />
 
           <Feed
-            style={{ left: "37%", bottom: "22%" }}
+            style={{ left: "35%", bottom: "15%" }}
             className="absolute"
             chain={chain}
           />

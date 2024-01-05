@@ -23,7 +23,7 @@ const TVL = () => {
 
   return (
     <div className="flex items-center justify-between text-xs text-neutral-200">
-      <p className="text-neutral-400">TVL:</p>&nbsp;
+      <p className="font-semibold">TVL:</p>&nbsp;
       <p className="font-semibold">{numberWithCommas(tvl)}</p>
     </div>
   );
