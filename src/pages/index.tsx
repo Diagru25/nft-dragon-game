@@ -35,11 +35,7 @@ export default function Home() {
         <div className="max-w-sm ml-auto">
           <Earn chain={chain} address={address} />
 
-          <Feed
-            style={{ left: "35%", bottom: "15%" }}
-            className="absolute"
-            chain={chain}
-          />
+          <Feed className="feed-container absolute" chain={chain} />
           <br />
         </div>
       </main>

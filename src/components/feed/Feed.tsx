@@ -19,7 +19,7 @@ import { useThemeContext } from "@/context/app";
 
 const Feed: FC<{
   className: string;
-  style: object;
+  style?: object;
   chain: any;
 }> = ({ className, style, chain }) => {
   const router = useRouter();

@@ -1,4 +1,7 @@
 import React, { FC } from "react";
+import TVL from "../tvl/TVL";
+import TypeOfDragon from "../type-of-dragon/TypeOfDragon";
+import ReferralLink from "../referral-link/ReferralLink";
 interface INavLink {
   label: string;
   value: string;
@@ -10,55 +13,30 @@ type Props = {
 const HamburgerMenu: FC<Props> = ({ onClose }) => {
   const navLinks: Array<INavLink> = [
     {
-      label: "Home",
-      value: "home",
-    },
-
-    {
-      label: "Perks",
-      value: "perks",
-    },
-
-    {
-      label: "Tokenomics",
-      value: "tokenomics",
-    },
-    {
-      label: "Tax burn",
-      value: "tax-burn",
+      label: "Docs",
+      value: "https://polyragon-organization.gitbook.io/polyragon/",
     },
   ];
 
-  const handleMoveToDiv = (id: string) => {
-    if (id === "home") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    } else {
-      const elem = document.getElementById(id);
-      const yOffset = -60;
-      if (elem) {
-        const y =
-          elem.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
-    }
-    onClose();
-  };
-
   return (
-    <div className="absolute z-20 flex flex-col gap-2 py-2 px-1 w-full bg-light font-semibold">
+    <div
+      style={{ background: "rgba(0,0,0,0.9)" }}
+      className="absolute z-20 flex flex-col gap-2 w-full font-semibold h-screen p-4"
+    >
+      <TVL />
       {navLinks.map((link, id) => (
-        <div
+        <a
           key={id}
-          className={`p-2`}
-          onClick={() => handleMoveToDiv(link.value)}
+          className="text-neutral-200"
+          href={link.value}
+          rel="noopener noreferrer"
+          target="_blank"
         >
           {link.label}
-        </div>
+        </a>
       ))}
+      <ReferralLink />
+      <TypeOfDragon />
     </div>
   );
 };

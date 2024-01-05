@@ -23,9 +23,8 @@ const ReferralLink = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-10 gap-4 px-4 overflow-hidden bg-zinc-900 rounded-2xl">
-      <h5 className="text-xs">{refLink}</h5>
-
+    <div className="flex items-center justify-center sm:justify-between h-10 gap-4 px-4 overflow-hidden bg-zinc-900 sm:bg-transparent rounded-2xl sm:text-neutral-200 sm:w-full sm:border sm:border-neutral-200">
+      <h5 className="text-xs sm:text-sm">{refLink}</h5>
       <button
         type="button"
         onClick={handleCopy}

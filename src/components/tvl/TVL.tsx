@@ -22,7 +22,7 @@ const TVL = () => {
   }, [refetch]);
 
   return (
-    <div className="flex items-center justify-between text-xs text-neutral-200">
+    <div className="flex items-center justify-between text-xs sm:text-sm text-neutral-200">
       <p className="font-semibold">TVL:</p>&nbsp;
       <p className="font-semibold">{numberWithCommas(tvl)}</p>
     </div>

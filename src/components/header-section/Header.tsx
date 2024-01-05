@@ -78,7 +78,7 @@ function Header() {
       <div className="fixed top-0 left-0 z-50 hidden w-screen sm:block">
         {toggleMenu && <div className="overlay" />}
 
-        <div className="sticky z-50 flex items-center justify-between w-full px-5 py-2 bg-light shadow-primary-light">
+        <div className="sticky z-50 flex items-center justify-between w-full px-5 py-2">
           <ButtonConnectWallet />
           <button onClick={handleToggleMenu}>
             {toggleMenu ? <CloseIcon /> : <MenuIcon />}

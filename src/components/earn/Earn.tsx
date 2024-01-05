@@ -97,7 +97,7 @@ const Earn: FC<{ chain: any; address: any }> = ({ chain, address }) => {
 
   return (
     <div
-      className="flex flex-col gap-4 p-4 rounded-2xl bg-zinc-900 bg-opacity-40"
+      className="flex flex-col gap-4 p-4 rounded-2xl bg-zinc-900 bg-opacity-40 sm:bg-opacity-90 sm:absolute sm:top-20 sm:w-80"
       style={{
         margin: "0 8%",
       }}
