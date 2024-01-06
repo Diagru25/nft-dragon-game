@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@mantine/core";
-import { TYPE_OF_DRAGON } from "@/constants/common";
+
+import { TYPE_OF_DRAGON } from "@/constants/common.constant";
 import { useThemeContext } from "@/context/app";
 const getNameDragon = (data: string) => {
   if (!data) return "No dragon";
@@ -16,9 +16,9 @@ const TypeOfDragon = () => {
 
   return (
     <>
-      <Button variant="outline">
+      <button type="button">
         <p className="text-neutral-200">{getNameDragon(typeOfDragon)}</p>
-      </Button>
+      </button>
     </>
   );
 };

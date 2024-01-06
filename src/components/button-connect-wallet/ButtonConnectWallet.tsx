@@ -1,9 +1,12 @@
-import { Web3Button } from "@web3modal/react";
+import { useWeb3Modal } from "@web3modal/react";
 
 export default function ButtonConnectWallet() {
+  const { open } = useWeb3Modal();
   return (
     <>
-      <Web3Button />
+      <button type="button" onClick={() => open()}>
+        Connect wallet
+      </button>
     </>
   );
 }

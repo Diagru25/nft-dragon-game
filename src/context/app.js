@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { LOCAL_STORAGE_TYPE_DRAGON } from "@/constants/common";
+import { LOCAL_STORAGE_TYPE_DRAGON } from "@/constants/common.constant";
 
 const ThemeContext = createContext({});
 

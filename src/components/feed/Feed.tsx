@@ -1,9 +1,10 @@
-import { LOCAL_STORAGE_TYPE_DRAGON, TYPE_OF_DRAGON } from "@/constants/common";
+import {
+  LOCAL_STORAGE_TYPE_DRAGON,
+  TYPE_OF_DRAGON,
+} from "@/constants/common.constant";
 import { contractConfig } from "@/constants/nft.constant";
 import { formatValueContract } from "@/helpers/string";
 import { validAddress } from "@/helpers/validate";
-import { Button, Checkbox, Modal, Stack } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import React, { FC, Fragment, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -24,7 +25,6 @@ const Feed: FC<{
 }> = ({ className, style, chain }) => {
   const router = useRouter();
   const refToken: any = validAddress(router.query.ref);
-  const [opened, { open, close }] = useDisclosure(false);
 
   //@ts-ignore
   const { typeOfDragon, setTypeOfDragon } = useThemeContext();
@@ -101,7 +101,7 @@ const Feed: FC<{
         type="button"
         style={style}
         className={`${className} pulse-button  `}
-        onClick={open}
+        onClick={handleOnClick}
         disabled={isLoading ? true : false}
       >
         <span className="whitespace-pre-line">
@@ -109,11 +109,12 @@ const Feed: FC<{
         </span>
       </button>
 
-      <Modal opened={opened} onClose={close} title="Type of Dragon" centered>
+      <Fragment>
         <div className="flex flex-col gap-2 p-4">
-          <Stack>
+          {/* <div>
             {TYPE_OF_DRAGON.map((item, idx) => (
-              <Checkbox
+              <input
+                type="checkbox"
                 key={idx}
                 label={item.label}
                 value={item.matic}
@@ -121,19 +122,19 @@ const Feed: FC<{
                 onChange={(e) => handleCheckBoxChange(e.target.value)}
               />
             ))}
-          </Stack>
+          </div> */}
         </div>
         <div className="flex items-center justify-between">
-          <Button
+          <button
             disabled={isPrepareError ? true : false}
             type="button"
             onClick={handleOnClick}
             className="ml-auto"
           >
             Confirm
-          </Button>
+          </button>
         </div>
-      </Modal>
+      </Fragment>
     </Fragment>
   );
 };

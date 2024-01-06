@@ -33,10 +33,8 @@ export default function Home() {
         className={`${montserrat.className} relative`}
       >
         <div className="max-w-sm ml-auto">
-          <Earn chain={chain} address={address} />
-
-          <Feed className="feed-container absolute" chain={chain} />
-          <br />
+          {/* <Earn chain={chain} address={address} />
+          <Feed className="feed-container absolute" chain={chain} /> */}
         </div>
       </main>
     </>
