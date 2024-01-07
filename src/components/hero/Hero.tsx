@@ -24,7 +24,7 @@ const Hero = () => {
   const cardDescription = `Dragon is considered a symbol of strength and prosperity. Polyragon will help you find gems to increase your assets and bring a good life.`;
 
   return (
-    <div className="flex flex-wrap justify-between gap-4 py-20">
+    <div className="flex flex-wrap justify-between gap-4 py-20 sm:py-36">
       <div>
         <h1 className="whitespace-pre-line sm:whitespace-normal text-4xl sm:text-2xl">
           {title}

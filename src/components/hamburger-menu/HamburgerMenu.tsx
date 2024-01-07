@@ -21,7 +21,7 @@ const HamburgerMenu: FC<Props> = ({ onClose }) => {
   return (
     <div
       style={{ background: "rgba(0,0,0,0.9)" }}
-      className="absolute z-20 flex flex-col gap-2 w-full font-semibold h-screen p-4"
+      className="absolute z-20 flex flex-col gap-2 w-full font-semibold h-screen p-4 "
     >
       <TVL />
       {navLinks.map((link, id) => (

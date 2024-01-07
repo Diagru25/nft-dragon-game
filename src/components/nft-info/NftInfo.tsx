@@ -19,7 +19,7 @@ const NftInfo = () => {
   });
 
   return (
-    <div className="flex items-center justify-start divide-x divide-caption-label text-s">
+    <div className="flex items-center justify-start sm:justify-center divide-x divide-caption-label text-s">
       <p className="pr-2">
         <span className="text-caption-label text-s font-semibold">
           Polyragon Profit:

@@ -9,7 +9,7 @@ export default function ButtonConnectWallet() {
       <button
         type="button"
         onClick={() => open()}
-        className="p-2 text-base font-semibold transition-all transform border rounded-md hover:scale-95 hover:ease-in-out"
+        className="px-3 py-2 rounded-2xl text-base font-semibold transition-all transform border-2 border-call-to-action  hover:scale-95 hover:ease-in-out"
       >
         {address ? address : "Connect Wallet"}
       </button>

@@ -3,12 +3,11 @@ import Head from "next/head";
 import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 import { useEffect } from "react";
 import Hero from "@/components/hero/Hero";
-import Earn from "@/components/earn/Earn";
-import Feed from "@/components/feed/Feed";
 import Section from "@/components/common/Section";
 import DragonCategory from "@/components/dragon-category/DragonCategory";
 import YourPolyragon from "@/components/your-polyragon/YourPolyragon";
 import ReferralLink from "@/components/referral-link/ReferralLink";
+import NftInfo from "@/components/nft-info/NftInfo";
 
 const work_sans = Work_Sans({
   subsets: ["latin", "vietnamese"],
