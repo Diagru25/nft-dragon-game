@@ -5,7 +5,7 @@ import { useThemeContext } from "@/context/app";
 const getNameDragon = (data: string) => {
   if (!data) return "No dragon";
 
-  const foundObj = TYPE_OF_DRAGON.find((el) => el.matic === data);
+  const foundObj = TYPE_OF_DRAGON.find((el: any) => el.matic === data);
 
   if (foundObj) return foundObj.name;
   else return "No Dragon";
