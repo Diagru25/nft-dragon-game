@@ -2,16 +2,17 @@ import React from "react";
 
 type PropsType = {
   className?: string;
+  stroke?: string;
 };
 
-const CopyIcon = ({ className }: PropsType) => {
+const CopyIcon = ({ className, stroke }: PropsType) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
-      stroke="currentColor"
+      stroke={stroke || "#ffffff"}
       className={className || "w-6 h-6"}
     >
       <path

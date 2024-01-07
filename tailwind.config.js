@@ -13,7 +13,28 @@ module.exports = {
       lg: { min: "1200px" },
     },
     extend: {},
+    colors: {
+      background: "var(--background)",
+      "background-secondary": "var(--background---secondary)",
+      "caption-label": "var(--caption--label-text)",
+      "call-to-action": "var(--call-to-action)",
+      celeste: "var(--celeste)",
+      white: "#ffffff",
+    },
     boxShadow: {},
+    fontSize: {
+      base: "16px",
+      l: "22px",
+      m: "16px",
+      s: "12px",
+      xl: "28px",
+      "2xl": "38px",
+      "3xl": "51px",
+      "4xl": "67px",
+    },
+    fontFamily: {
+      "space-mono": "var(--font-family-space_mono)",
+    },
   },
   plugins: [],
 };

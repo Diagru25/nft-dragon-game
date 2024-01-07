@@ -3,6 +3,7 @@ import Silver from "@/assets/images/silver.jpg";
 import Gold from "@/assets/images/gold.jpg";
 import Diamond from "@/assets/images/diamond.jpg";
 import Ruby from "@/assets/images/ruby.jpg";
+import Referral from "@/assets/images/green.jpg";
 
 const TYPE_DRAGON = {
   BRONZE: Bronze,
@@ -10,6 +11,7 @@ const TYPE_DRAGON = {
   GOLD: Gold,
   DIAMOND: Diamond,
   RUBY: Ruby,
+  REFERRAL: Referral,
 };
 
 export { TYPE_DRAGON };

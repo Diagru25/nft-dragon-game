@@ -1,37 +1,60 @@
-export const TYPE_OF_DRAGON = [
+import { TYPE_DRAGON } from "@/assets/images";
+import { IDragon } from "@/models/IDragon.model";
+
+export const TYPE_OF_DRAGON: IDragon[] = [
   {
-    label: "Normal dragon 50 MATIC - 3% per day",
+    imgSrc: TYPE_DRAGON.BRONZE,
+    label: "Bronze Dragon",
     value: 1,
-    matic: "50",
-    name: "Normal dragon",
-  },
-
-  {
-    label: "Bronze dragon 100 MATIC - 3.5% per day",
-    value: 2,
-    matic: "100",
+    price: 50,
     name: "Bronze dragon",
+    upTo: "0.5",
+    max: 5000,
+    available: 300,
   },
 
   {
-    label: "Silver dragon 250 MATIC - 4% per day",
-    value: 3,
-    matic: "250",
+    imgSrc: TYPE_DRAGON.SILVER,
+    label: "Silver dragon",
+    value: 2,
+    price: 100,
     name: "Silver dragon",
+    upTo: "2",
+    max: 2000,
+    available: 150,
   },
 
   {
-    label: "Gold dragon 500 MATIC - 4.5% per day",
-    value: 4,
-    matic: "500",
+    imgSrc: TYPE_DRAGON.GOLD,
+    label: "Gold Dragon ",
+    value: 3,
+    price: 200,
     name: "Gold dragon",
+    upTo: "8",
+    max: 1000,
+    available: 200,
   },
 
   {
-    label: "Diamond dragon 1000 MATIC - 5% per day",
-    value: 5,
-    matic: "1000",
+    imgSrc: TYPE_DRAGON.DIAMOND,
+    label: "Diamond Dragon",
+    value: 4,
+    price: 500,
     name: "Diamond dragon",
+    upTo: "30",
+    max: 500,
+    available: 280,
+  },
+
+  {
+    imgSrc: TYPE_DRAGON.RUBY,
+    label: "Ruby Dragon",
+    value: 5,
+    price: 1000,
+    name: "Ruby dragon",
+    upTo: "80",
+    max: 100,
+    available: 30,
   },
 ];
 

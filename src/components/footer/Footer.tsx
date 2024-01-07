@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="flex items-center justify-center py-4 font-semibold text-md">
-      <span>By aichick.io © 2023</span>
+    <footer className="flex items-center justify-center bg-background-secondary py-10 font-semibold">
+      <span>By Polyragon.io © 2024</span>
     </footer>
   );
 };

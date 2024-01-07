@@ -88,9 +88,9 @@
   --font-size-m: 16px;
   --font-size-s: 12px;
   --font-size-xl: 28px;
-  --font-size-xxl: 38px;
-  --font-size-xxxl: 51px;
-  --font-size-xxxxl: 67px;
+  --font-size-2xl: 38px;
+  --font-size-3xl: 51px;
+  --font-size-4xl: 67px;
   --font-family-space_mono: "Space Mono", Helvetica;
   --font-family-work_sans: "Work Sans", Helvetica;
 }
@@ -121,4 +121,24 @@ body * {
   height: 100vh;
   pointer-events: auto;
   background: rgba(0, 0, 0, 0.5);
+}
+
+input {
+  text-align: center;
+  border: 1px solid #6c757d;
+}
+
+input[type="number"] {
+  -webkit-appearance: textfield !important;
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.plusminus {
+  width: 30%;
 }

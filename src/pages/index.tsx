@@ -1,11 +1,16 @@
-import Earn from "@/components/earn/Earn";
-import Feed from "@/components/feed/Feed";
-import { Montserrat } from "next/font/google";
+import { Work_Sans } from "next/font/google";
 import Head from "next/head";
 import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 import { useEffect } from "react";
+import Hero from "@/components/hero/Hero";
+import Earn from "@/components/earn/Earn";
+import Feed from "@/components/feed/Feed";
+import Section from "@/components/common/Section";
+import DragonCategory from "@/components/dragon-category/DragonCategory";
+import YourPolyragon from "@/components/your-polyragon/YourPolyragon";
+import ReferralLink from "@/components/referral-link/ReferralLink";
 
-const montserrat = Montserrat({
+const work_sans = Work_Sans({
   subsets: ["latin", "vietnamese"],
   weight: "variable",
 });
@@ -28,11 +33,20 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main
-        style={{ height: "calc(100vh - 56px)" }}
-        className={`${montserrat.className} relative`}
-      >
-        <div className="max-w-sm ml-auto">
+      <main className={`${work_sans.className} relative`}>
+        <div className="container mx-auto sm:px-4">
+          <Hero />
+
+          <Section title="#Step 1:" description="Buy at least one Polyragon">
+            <DragonCategory />
+          </Section>
+
+          <Section title="Your Polyragon" description="" className="mt-20">
+            <YourPolyragon />
+          </Section>
+
+          <ReferralLink />
+
           {/* <Earn chain={chain} address={address} />
           <Feed className="feed-container absolute" chain={chain} /> */}
         </div>

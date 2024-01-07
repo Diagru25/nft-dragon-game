@@ -1,17 +1,22 @@
-import React, { FC } from 'react'
+import React, { FC } from "react";
 
-const Section: FC<{ title: string; children: React.ReactNode }> = ({
-	title,
-	children,
-}) => {
-	return (
-		<section className='flex flex-col justify-center items-center'>
-			<p className='text-5xl text-primary pb-10 font-black text-center sm:text-4xl'>
-				{title}
-			</p>
-			{children}
-		</section>
-	)
-}
+const Section: FC<{
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+  className?: string;
+}> = ({ title, description, className, children }) => {
+  return (
+    <section className={`${className} flex flex-col justify-start text-white`}>
+      <p className="text-2xl font-semibold capitalize">{title}</p>
+      {description ? (
+        <p className="text-l capitalize leading-9 lg:mb-14 mb-10  ">
+          {description}
+        </p>
+      ) : null}
+      {children}
+    </section>
+  );
+};
 
-export default Section
+export default Section;

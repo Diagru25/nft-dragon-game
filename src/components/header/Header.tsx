@@ -1,13 +1,19 @@
 import { Fragment } from "react";
+import dynamic from "next/dynamic";
 import useToggle from "@/hooks/useToggle";
 import HamburgerMenu from "../hamburger-menu/HamburgerMenu";
-import ButtonConnectWallet from "../button-connect-wallet/ButtonConnectWallet";
 import MenuIcon from "../icon/Menu";
 import CloseIcon from "../icon/Close";
-import ReferralLink from "../referral-link/ReferralLink";
-import TVL from "../tvl/TVL";
-import TypeOfDragon from "../type-of-dragon/TypeOfDragon";
+// import ReferralLink from "../referral-link/ReferralLink";
+// import TVL from "../tvl/TVL";
+// import TypeOfDragon from "../type-of-dragon/TypeOfDragon";
 import { DOCS } from "@/constants/common.constant";
+
+const NftInfo = dynamic(() => import("../nft-info/NftInfo"));
+const ButtonConnectWallet = dynamic(
+  () => import("@/components/button-connect-wallet/ButtonConnectWallet"),
+  { ssr: false }
+);
 
 interface INavLink {
   label: string;
@@ -37,10 +43,12 @@ function Header() {
 
   return (
     <Fragment>
-      <section className="sticky top-0 left-0 z-50 items-center w-full py-2 ml-auto text-white sm:hidden shadow-primary-light bg-opacity-30">
-        <section className="container flex justify-end mx-auto">
-          <div className="flex items-center gap-8 pr-4">
-            <nav className="flex items-center gap-2">
+      <section className="sticky top-0 left-0 z-50 bg-background items-center w-full py-6 sm:hidden ">
+        <section className="container flex items justify-between mx-auto">
+          <NftInfo />
+
+          <div className="flex items-center gap-8">
+            {/* <nav className="flex items-center gap-2">
               <TVL />
               {navLinks.map((link) => (
                 <div
@@ -51,16 +59,17 @@ function Header() {
                   {link.label}
                 </div>
               ))}
-            </nav>
+            </nav> */}
 
-            <TypeOfDragon />
+            {/* <TypeOfDragon /> */}
 
-            <ReferralLink />
+            {/* <ReferralLink /> */}
             <ButtonConnectWallet />
           </div>
         </section>
       </section>
 
+      {/* RESPONSIVE VERSION */}
       <div className="fixed top-0 left-0 z-50 hidden w-screen sm:block">
         {toggleMenu && <div className="overlay" />}
 

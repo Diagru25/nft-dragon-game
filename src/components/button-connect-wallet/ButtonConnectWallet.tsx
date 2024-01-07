@@ -4,8 +4,12 @@ export default function ButtonConnectWallet() {
   const { open } = useWeb3Modal();
   return (
     <>
-      <button type="button" onClick={() => open()}>
-        Connect wallet
+      <button
+        type="button"
+        onClick={() => open()}
+        className="transform transition-all hover:scale-95 hover:ease-in-out font-semibold text-base"
+      >
+        Connect Wallet
       </button>
     </>
   );
