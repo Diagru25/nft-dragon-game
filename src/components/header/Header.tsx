@@ -43,8 +43,8 @@ function Header() {
 
   return (
     <Fragment>
-      <section className="sticky top-0 left-0 z-50 bg-background items-center w-full py-6 sm:hidden ">
-        <section className="container flex items justify-between mx-auto">
+      <section className="sticky top-0 left-0 z-50 items-center w-full py-4 bg-background sm:hidden ">
+        <section className="container flex justify-between mx-auto items">
           <NftInfo />
 
           <div className="flex items-center gap-8">
