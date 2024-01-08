@@ -110,7 +110,7 @@ const Card: FC<ICardProps> = ({ dragon }) => {
           {SYMBOL.DIAMOND} daily.
         </p>
 
-        <div className="mt-4">
+        <div className="flex flex-col gap-1 mt-4">
           <div className="flex items-center justify-between">
             <p className="text-caption-label text-s">Price</p>
             <p className="text-base">
@@ -119,14 +119,16 @@ const Card: FC<ICardProps> = ({ dragon }) => {
           </div>
 
           <div className="flex items-center justify-between">
-            <p className="text-caption-label text-s">Limited:</p>
-            <p className="text-base">{5000}</p>
-            <p className="text-caption-label text-s">|</p>
-            <p className="text-caption-label text-s">Left:</p>
-            <p className="text-base">{1000}</p>
+            <p className="text-caption-label text-s">
+              Limited: <span className="text-white">{5000}</span>
+            </p>
+
+            <p className="text-caption-label text-s">
+              Left: <span className="text-white">{1000}</span>
+            </p>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between my-2">
+          <div className="flex flex-wrap items-center justify-between my-1">
             <div className="flex justify-center w-full h-6 overflow-hidden rounded-lg">
               <button
                 type="button"
