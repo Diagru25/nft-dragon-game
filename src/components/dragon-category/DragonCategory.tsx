@@ -3,18 +3,39 @@ import Image from "next/image";
 import { TYPE_OF_DRAGON } from "@/constants/common.constant";
 import { SYMBOL } from "@/constants/nft.constant";
 import { IDragon } from "@/models/IDragon.model";
+import { useRouter } from "next/router";
+import { validAddress } from "@/helpers/validate";
+import {
+  UseContractWriteConfig,
+  UsePrepareContractWriteConfig,
+  useAccount,
+  useContractWrite,
+  useNetwork,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
+import { useWeb3Modal } from "@web3modal/react";
+import { toast } from "react-toastify";
+import { contractConfig } from "@/constants/nft.constant";
+import { formatValueContract } from "@/helpers/string";
 
 interface ICardProps {
   dragon: IDragon;
 }
 
 const Card: FC<ICardProps> = ({ dragon }) => {
-  const rate = 0.8325;
+  const router = useRouter();
+  const refToken: any = validAddress(router.query.ref);
+
+  const { open } = useWeb3Modal();
+  const { address, isConnected: isConnectedAccount } = useAccount();
+  const { chain } = useNetwork();
+
   const [number, setNumber] = useState<number>(0);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const totalPrice = dragon.price * 1.05;
+    const totalPrice = Number(number) * (dragon.price * 1.05);
     setTotal(totalPrice);
   }, [number, dragon.price]);
 
@@ -22,7 +43,56 @@ const Card: FC<ICardProps> = ({ dragon }) => {
     setNumber(Number(value));
   };
 
-  const handleBuy = () => {};
+  const {
+    config,
+    error: prepareError,
+    isError: isPrepareError,
+  } = usePrepareContractWrite({
+    ...contractConfig,
+    functionName: "buyDragon",
+    args: [refToken || address],
+    overrides: {
+      //@ts-ignore
+      value: formatValueContract(dragon.price.toString()),
+    },
+  } as UsePrepareContractWriteConfig);
+
+  const {
+    data,
+    error: feedError,
+    isError: isFeedError,
+    write,
+  } = useContractWrite(config as UseContractWriteConfig);
+
+  const { isLoading, isSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+  });
+
+  const handleBuy = () => {
+    if (chain?.id !== 80001 && chain?.id !== 137) {
+      return toast.error("Wrong chain! You must move to Arbitrum");
+    }
+    if (isPrepareError) {
+      //@ts-ignore
+      return toast.error(
+        //@ts-ignore
+        prepareError?.error?.data?.message || prepareError?.message
+      );
+    }
+    // if (isFeedError) {
+    //   console.log("feed err");
+    //   //@ts-ignore
+    //   return toast.error(feedError?.error?.data?.message || feedError?.message);
+    // }
+
+    write?.();
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("feed success");
+    }
+  }, [isSuccess]);
 
   return (
     <div className="flex flex-col overflow-hidden bg-background-secondary rounded-2xl ">
@@ -85,11 +155,6 @@ const Card: FC<ICardProps> = ({ dragon }) => {
           </div>
 
           <div className="flex items-center justify-between">
-            <p className="text-caption-label text-s">Available</p>
-            <p className="text-base">{dragon.available}</p>
-          </div>
-
-          <div className="flex items-center justify-between">
             <p className="text-caption-label text-s">Total</p>
             <p className="text-base">
               {total} {SYMBOL.DIAMOND}
@@ -106,10 +171,10 @@ const Card: FC<ICardProps> = ({ dragon }) => {
         <button
           type="button"
           className="w-full px-4 py-2 transition-all duration-300 ease-in-out border-none rounded-xl bg-call-to-action hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed"
-          onClick={handleBuy}
-          disabled={number === 0}
+          onClick={() => (isConnectedAccount ? handleBuy() : open())}
+          disabled={isConnectedAccount && number === 0}
         >
-          Buy
+          {isConnectedAccount ? "Buy" : "Connect Wallet"}
         </button>
       </div>
     </div>
