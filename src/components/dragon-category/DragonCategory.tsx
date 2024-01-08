@@ -28,16 +28,21 @@ const Card: FC<ICardProps> = ({ dragon }) => {
   const refToken: any = validAddress(router.query.ref);
 
   const { open } = useWeb3Modal();
-  const { address, isConnected: isConnectedAccount } = useAccount();
+  const { address, isConnected } = useAccount();
   const { chain } = useNetwork();
 
   const [number, setNumber] = useState<number>(0);
   const [total, setTotal] = useState(0);
+  const [isConnectedAccount, setIsConnectedAccount] = useState(false);
 
   useEffect(() => {
     const totalPrice = Number(number) * (dragon.price * 1.05);
     setTotal(totalPrice);
   }, [number, dragon.price]);
+
+  useEffect(() => {
+    setIsConnectedAccount(isConnected);
+  }, [isConnected]);
 
   const handleChangeInput = (value: number | string, id: number) => {
     setNumber(Number(value));
