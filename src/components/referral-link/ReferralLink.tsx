@@ -11,7 +11,7 @@ const ReferralLink = () => {
 
   const handleCopy = () => {
     if (isConnected) {
-      const inviteLink = `http://localhost:3000?ref=${address}`;
+      const inviteLink = `http://polyragon.com?ref=${address}`;
       navigator.clipboard
         .writeText(inviteLink)
         .then(() => {
@@ -25,7 +25,7 @@ const ReferralLink = () => {
   };
 
   return (
-    <div className="mt-20 p-14 md:p-12 sm:p-10 bg-background-secondary rounded-2xl flex justify-around mb-20">
+    <div className="flex justify-around mt-20 mb-20 p-14 md:p-12 sm:p-10 bg-background-secondary rounded-2xl">
       <Image
         src={TYPE_DRAGON.REFERRAL}
         alt="Polyragon image referral"
@@ -35,15 +35,14 @@ const ReferralLink = () => {
       />
 
       <div className="flex flex-col max-w-md">
-        <h1 className="text-2xl sm:text-xl font-semibold capitalize">
+        <h1 className="text-2xl font-semibold capitalize sm:text-xl">
           Referral Link
         </h1>
-        <p className="text-l sm:text-base capitalize">
-          You can only receive a referral link after you purchase at least one
-          Polyragon.
+        <p className="capitalize text-l sm:text-base">
+          Up to 10% And You Can Withdraw Anytime.
         </p>
 
-        <div className="flex items-center justify-between bg-white mt-10 sm:mt-6 py-4 px-5 sm:py-3 sm:px-4 rounded-3xl">
+        <div className="flex items-center justify-between px-5 py-4 mt-10 bg-white sm:mt-6 sm:py-3 sm:px-4 rounded-3xl">
           <h5 className="text-caption-label">{refLink}</h5>
           <button
             type="button"
@@ -51,11 +50,15 @@ const ReferralLink = () => {
             className="p-1 bg-transparent rounded-full"
           >
             <CopyIcon
-              className="w-8 h-8 sm:w-6 sm:h-6 rounded-full"
+              className="w-8 h-8 rounded-full sm:w-6 sm:h-6"
               stroke="var(--celeste)"
             />
           </button>
         </div>
+        <p className="text-sm xs:text-base">
+          The referral link is only available when you have at least 1
+          Polyragon.
+        </p>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 
-const NftInfo = dynamic(() => import("../nft-info/NftInfo"));
+const NftInfo = dynamic(() => import("../nft-info/NftInfo"), { ssr: false });
 const ButtonConnectWallet = dynamic(
   () => import("@/components/button-connect-wallet/ButtonConnectWallet"),
   { ssr: false }
@@ -21,7 +21,7 @@ function Header() {
 
       {/* RESPONSIVE VERSION */}
       <div className="fixed top-0 left-0 z-50 hidden w-screen sm:block bg-background">
-        <div className="flex flex-col justify-between gap-4 w-full px-5 py-4 ">
+        <div className="flex flex-col justify-between w-full gap-4 px-5 py-4 ">
           <ButtonConnectWallet />
           <NftInfo />
         </div>

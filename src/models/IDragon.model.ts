@@ -9,4 +9,5 @@ export interface IDragon {
   upTo: string;
   max: number;
   available: number;
+  dailyPercent: number;
 }

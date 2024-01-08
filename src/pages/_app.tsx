@@ -17,6 +17,7 @@ import {
 } from "wagmi/chains";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Fragment } from "react";
 
 const chains = [arbitrum, mainnet, polygon, polygonMumbai, bscTestnet];
 const projectId = "3efa42884d756748bc7e374d7b3499ac";
@@ -32,8 +33,10 @@ const ethereumClient = new EthereumClient(wagmiClient, chains);
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
-      <Layout>
-        <Component {...pageProps} />
+      <Fragment>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
         <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
         <ToastContainer
           position="top-right"
@@ -48,7 +51,7 @@ export default function App({ Component, pageProps }: AppProps) {
           limit={3}
           theme="light"
         />
-      </Layout>
+      </Fragment>
     </WagmiConfig>
   );
 }

@@ -11,6 +11,7 @@ export const TYPE_OF_DRAGON: IDragon[] = [
     upTo: "0.5",
     max: 5000,
     available: 300,
+    dailyPercent: 1,
   },
 
   {
@@ -22,6 +23,7 @@ export const TYPE_OF_DRAGON: IDragon[] = [
     upTo: "2",
     max: 2000,
     available: 150,
+    dailyPercent: 2,
   },
 
   {
@@ -33,6 +35,7 @@ export const TYPE_OF_DRAGON: IDragon[] = [
     upTo: "8",
     max: 1000,
     available: 200,
+    dailyPercent: 4,
   },
 
   {
@@ -44,6 +47,7 @@ export const TYPE_OF_DRAGON: IDragon[] = [
     upTo: "30",
     max: 500,
     available: 280,
+    dailyPercent: 6,
   },
 
   {
@@ -55,6 +59,7 @@ export const TYPE_OF_DRAGON: IDragon[] = [
     upTo: "80",
     max: 100,
     available: 30,
+    dailyPercent: 8,
   },
 ];
 
