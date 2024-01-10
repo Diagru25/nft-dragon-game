@@ -27,7 +27,7 @@ const Footer = () => {
         </div>
         <div className="w-full border border-caption-label"></div>
         <span className="font-normal text-s text-celeste">
-          By Polyragon.io © 2024
+          By Polyragon.com © 2024
         </span>
       </div>
     </footer>
