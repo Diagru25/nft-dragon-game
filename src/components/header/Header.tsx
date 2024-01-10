@@ -1,7 +1,16 @@
 import { Fragment } from "react";
 import dynamic from "next/dynamic";
 
-const NftInfo = dynamic(() => import("../nft-info/NftInfo"), { ssr: false });
+const NftInfo = dynamic(() => import("@/components/nft-info/NftInfo"), {
+  ssr: true,
+});
+const RewardInfo = dynamic(
+  () => import("@/components/reward-info/RewardInfo"),
+  {
+    ssr: false,
+  }
+);
+
 const ButtonConnectWallet = dynamic(
   () => import("@/components/button-connect-wallet/ButtonConnectWallet"),
   { ssr: false }
@@ -14,6 +23,8 @@ function Header() {
         <section className="container flex justify-between mx-auto items">
           <NftInfo />
           <div className="flex items-center gap-8">
+            <RewardInfo />
+
             <ButtonConnectWallet />
           </div>
         </section>

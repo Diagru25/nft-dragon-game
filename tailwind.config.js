@@ -20,6 +20,8 @@ module.exports = {
       "call-to-action": "var(--call-to-action)",
       celeste: "var(--celeste)",
       white: "#ffffff",
+      red: "red",
+      green: "green",
     },
     boxShadow: {},
     fontSize: {

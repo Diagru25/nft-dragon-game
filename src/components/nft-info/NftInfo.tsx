@@ -1,49 +1,67 @@
 import { SYMBOL } from "@/constants/nft.constant";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
+import TriangleUpIcon from "@/components/icon/TriangleUp";
+import TriangleDownIcon from "@/components/icon/TriangleDown";
 
 const NftInfo = () => {
-  const { isConnected } = useAccount();
-  const [price, setPrice] = useState(0.8368);
-
-  const poliragonProfit = 18;
-  const referralReward = 18;
-
-  useEffect(() => {
-    const min = Math.ceil(8300);
-    const max = Math.ceil(8500);
-    const timer = setTimeout(
-      () => setPrice(Math.floor(Math.random() * (max - min) + min) / 10000),
-      1500
-    );
-
-    return () => clearTimeout(timer);
+  const [price, setPrice] = useState({
+    price: 0,
+    priceYesterday: 0,
   });
 
-  if (typeof window !== "undefined")
-    return isConnected ? (
-      <div className="flex items-center justify-start divide-x sm:justify-center divide-caption-label text-s">
-        <p className="pr-2">
-          <span className="font-semibold text-caption-label text-s">
-            Polyragon Profit:
-          </span>
-          {poliragonProfit} {SYMBOL.DIAMOND}
+  const getPrice = async () => {
+    try {
+      const data = await axios.get(
+        "https://api.diadata.org/v1/assetQuotation/Polygon/0x0000000000000000000000000000000000001010"
+      );
+
+      setPrice({
+        price: data.data.Price,
+        priceYesterday: data.data.PriceYesterday,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPrice();
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => getPrice(), 120000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="flex items-center justify-start divide-x sm:justify-center divide-caption-label text-s">
+      <p className="px-2">1 {SYMBOL.DIAMOND} = 1 USDT</p>
+      <p className="px-2">
+        MATICUSDT = <b>{price.price.toFixed(4)}</b> USDT
+      </p>
+
+      {price.priceYesterday ? (
+        <p
+          className={`${
+            price.price < price.priceYesterday ? "text-red" : "text-green"
+          } flex items-center pl-2 gap-1`}
+        >
+          {price.price < price.priceYesterday ? (
+            <TriangleDownIcon />
+          ) : (
+            <TriangleUpIcon />
+          )}
+
+          {(
+            ((price.price - price.priceYesterday) / price.priceYesterday) *
+            100
+          ).toFixed(2) + " %"}
         </p>
-        <p className="px-2">
-          <span className="font-semibold text-caption-label text-s">
-            Referral Reward:
-          </span>
-          {referralReward} {SYMBOL.DIAMOND}
-        </p>
-        <p className="px-2">1{SYMBOL.DIAMOND} = 1 USDT</p>
-        <p className="pl-2">
-          MATICUSDT = <b>{price}</b> USDT
-        </p>
-      </div>
-    ) : (
-      <div></div>
-    );
-  else return <div></div>;
+      ) : null}
+    </div>
+  );
 };
 
 export default NftInfo;
