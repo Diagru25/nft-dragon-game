@@ -108,9 +108,9 @@ const Card: FC<ICardProps> = ({ dragon }) => {
         className="transition-all duration-300 ease-in-out hover:scale-110"
       />
 
-      <div className="p-5">
-        <p className="font-semibold leading-8 text-l">{dragon.label}</p>
-        <p className="text-base leading-6">
+      <div className="px-4 py-5">
+        <p className="font-semibold text-[20px]">{dragon.label}</p>
+        <p className="mt-1 text-base leading-6">
           Earn up to {(dragon.price * dragon.dailyPercent) / 100}{" "}
           {SYMBOL.DIAMOND} daily.
         </p>
