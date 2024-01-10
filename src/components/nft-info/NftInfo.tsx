@@ -33,7 +33,7 @@ const NftInfo = () => {
     const timer = setTimeout(() => getPrice(), 120000);
 
     return () => clearTimeout(timer);
-  }, []);
+  });
 
   return (
     <div className="flex items-center justify-start divide-x sm:justify-center divide-caption-label text-s">
