@@ -24,8 +24,11 @@ export default function Home() {
     <>
       <Head>
         <title>Polygon Network Reward Pool</title>
-        <meta name="description" content="" />
+        <meta name="description" content="aaaaaaa" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="Polygon Network Reward Pool" />
+        <meta property="og:description" content="Polygon Network Reward Pool" />
+        <meta property="og:image" content="opengraph-image.jpg" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${work_sans.className} relative`}>

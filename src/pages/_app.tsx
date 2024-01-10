@@ -19,6 +19,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Fragment } from "react";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "judhgidufghdfiu",
+  description: "fhdsifhdsufhdfu",
+};
+
 const chains = [arbitrum, mainnet, polygon, polygonMumbai, bscTestnet];
 const projectId = "3efa42884d756748bc7e374d7b3499ac";
 
