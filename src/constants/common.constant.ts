@@ -4,10 +4,10 @@ import { IDragon } from "@/models/IDragon.model";
 export const TYPE_OF_DRAGON: IDragon[] = [
   {
     imgSrc: TYPE_DRAGON.BRONZE,
-    label: "Bronze Dragon",
+    label: "Bronze Polyragon",
     value: 1,
     price: 50,
-    name: "Bronze dragon",
+    name: "Bronze Polyragon",
     upTo: "0.5",
     max: 5000,
     available: 300,
@@ -16,10 +16,10 @@ export const TYPE_OF_DRAGON: IDragon[] = [
 
   {
     imgSrc: TYPE_DRAGON.SILVER,
-    label: "Silver dragon",
+    label: "Silver Polyragon",
     value: 2,
     price: 100,
-    name: "Silver dragon",
+    name: "Silver Polyragon",
     upTo: "2",
     max: 2000,
     available: 150,
@@ -28,10 +28,10 @@ export const TYPE_OF_DRAGON: IDragon[] = [
 
   {
     imgSrc: TYPE_DRAGON.GOLD,
-    label: "Gold Dragon ",
+    label: "Gold Polyragon",
     value: 3,
     price: 200,
-    name: "Gold dragon",
+    name: "Gold Polyragon",
     upTo: "8",
     max: 1000,
     available: 200,
@@ -40,10 +40,10 @@ export const TYPE_OF_DRAGON: IDragon[] = [
 
   {
     imgSrc: TYPE_DRAGON.DIAMOND,
-    label: "Diamond Dragon",
+    label: "Diamond Polyragon",
     value: 4,
     price: 500,
-    name: "Diamond dragon",
+    name: "Diamond Polyragon",
     upTo: "30",
     max: 500,
     available: 280,
@@ -52,10 +52,10 @@ export const TYPE_OF_DRAGON: IDragon[] = [
 
   {
     imgSrc: TYPE_DRAGON.RUBY,
-    label: "Ruby Dragon",
+    label: "Ruby Polyragon",
     value: 5,
     price: 1000,
-    name: "Ruby dragon",
+    name: "Ruby Polyragon",
     upTo: "80",
     max: 100,
     available: 30,
