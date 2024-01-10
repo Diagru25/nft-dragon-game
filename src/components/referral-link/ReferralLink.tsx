@@ -34,7 +34,7 @@ const ReferralLink = () => {
         className="rounded-2xl sm:hidden"
       />
 
-      <div className="flex flex-col max-w-md">
+      <div className="flex flex-col max-w-lg">
         <h1 className="text-2xl font-semibold capitalize sm:text-xl">
           Referral Link
         </h1>
@@ -55,7 +55,7 @@ const ReferralLink = () => {
             />
           </button>
         </div>
-        <p className="text-sm xs:text-base">
+        <p className="mt-4 text-sm xs:text-base">
           The referral link is only available when you have at least 1
           Polyragon.
         </p>
