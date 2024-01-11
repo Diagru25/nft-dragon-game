@@ -30,10 +30,13 @@ const RewardInfo = () => {
   } as UseContractReadConfig);
 
   useEffect(() => {
-    const interval = setInterval(() => refetch(), 10000);
+    const interval = setInterval(() => {
+      if (isConnected) refetch();
+      else return;
+    }, 10000);
 
     return () => clearInterval(interval);
-  }, [refetch]);
+  }, [refetch, isConnected]);
 
   if (typeof window !== "undefined")
     return isConnected ? (
