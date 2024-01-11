@@ -6,9 +6,11 @@ import { IDragon } from "@/models/IDragon.model";
 import { useRouter } from "next/router";
 import { validAddress } from "@/helpers/validate";
 import {
+  UseContractReadConfig,
   UseContractWriteConfig,
   UsePrepareContractWriteConfig,
   useAccount,
+  useContractRead,
   useContractWrite,
   useNetwork,
   usePrepareContractWrite,
@@ -17,13 +19,14 @@ import {
 import { useWeb3Modal } from "@web3modal/react";
 import { toast } from "react-toastify";
 import { contractConfig } from "@/constants/nft.constant";
-import { formatValueContract } from "@/helpers/string";
+import { useThemeContext } from "@/context/app";
 
 interface ICardProps {
   dragon: IDragon;
+  refetch: any;
 }
 
-const Card: FC<ICardProps> = ({ dragon }) => {
+const Card: FC<ICardProps> = ({ dragon, refetch }) => {
   const router = useRouter();
   const refToken: any = validAddress(router.query.ref);
 
@@ -34,6 +37,27 @@ const Card: FC<ICardProps> = ({ dragon }) => {
   const [number, setNumber] = useState<number>(0);
   const [total, setTotal] = useState(0);
   const [isConnectedAccount, setIsConnectedAccount] = useState(false);
+
+  const [maticPrice, setMaticPrice] = useState<any>();
+
+  //@ts-ignore
+  const { setNofBuyPolyragon } = useThemeContext();
+
+  const { refetch: refetchPrice } = useContractRead({
+    ...contractConfig,
+    functionName: "minDragonsPrice",
+    // args: [address],
+    onSuccess(data: any) {
+      //0: tỷ giá USDT - MATIC
+      //1: MATIC
+      // console.log("hhhhh: ", Number(data[0] / Math.pow(10, 8)).toString());
+      // console.log("hhhhh: ", Number(data[1] / Math.pow(10, 12)).toString());
+      setMaticPrice(Number(data[1]));
+    },
+    onError(err) {
+      console.log("minDragonsPrice", err);
+    },
+  } as UseContractReadConfig);
 
   useEffect(() => {
     const totalPrice = Number(number) * (dragon.price * 1.05);
@@ -46,6 +70,7 @@ const Card: FC<ICardProps> = ({ dragon }) => {
 
   const handleChangeInput = (value: number | string, id: number) => {
     setNumber(Number(value));
+    refetchPrice();
   };
 
   const {
@@ -55,10 +80,10 @@ const Card: FC<ICardProps> = ({ dragon }) => {
   } = usePrepareContractWrite({
     ...contractConfig,
     functionName: "buyDragon",
-    args: [refToken || address],
+    args: [refToken || address, number],
     overrides: {
       //@ts-ignore
-      value: formatValueContract(dragon.price.toString()),
+      value: (number * (dragon.price / 50) * maticPrice).toString(),
     },
   } as UsePrepareContractWriteConfig);
 
@@ -95,8 +120,12 @@ const Card: FC<ICardProps> = ({ dragon }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("feed success");
+      toast.success(`Buy ${number} ${dragon.name} success`);
+      setNumber(0);
+      refetch();
+      setNofBuyPolyragon(Math.random());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   return (
@@ -125,11 +154,11 @@ const Card: FC<ICardProps> = ({ dragon }) => {
 
           <div className="flex items-center justify-between">
             <p className="text-caption-label text-s">
-              Limited: <span className="text-white">{5000}</span>
+              Limited: <span className="text-white">{dragon.max}</span>
             </p>
 
             <p className="text-caption-label text-s">
-              Left: <span className="text-white">{1000}</span>
+              Left: <span className="text-white">{dragon.available}</span>
             </p>
           </div>
 
@@ -175,25 +204,60 @@ const Card: FC<ICardProps> = ({ dragon }) => {
       </div>
 
       <div className="flex w-full px-5 pb-5">
-        <button
-          type="button"
-          className="w-full px-4 py-2 transition-all duration-300 ease-in-out border-none rounded-xl bg-call-to-action hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed"
-          onClick={() => (isConnectedAccount ? handleBuy() : open())}
-          disabled={isConnectedAccount && number === 0}
-        >
-          {isConnectedAccount ? "Buy" : "Connect Wallet"}
-        </button>
+        {isLoading ? (
+          <button
+            type="button"
+            className="w-full px-4 py-2 transition-all duration-300 ease-in-out border-none rounded-xl bg-call-to-action hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed"
+            disabled={true}
+          >
+            Loading...
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="w-full px-4 py-2 transition-all duration-300 ease-in-out border-none rounded-xl bg-call-to-action hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed"
+            onClick={() => (isConnectedAccount ? handleBuy() : open())}
+            disabled={isConnectedAccount && number === 0}
+          >
+            {isConnectedAccount
+              ? `Buy (${
+                  number
+                    ? (
+                        (number * (dragon.price / 50) * maticPrice) /
+                        1e12
+                      ).toFixed(2)
+                    : 0
+                } MATIC)`
+              : "Connect Wallet"}
+          </button>
+        )}
       </div>
     </div>
   );
 };
 
 const DragonCategory = () => {
+  const [polyragons, setPolyragons] = useState(TYPE_OF_DRAGON);
+
+  const { refetch } = useContractRead({
+    ...contractConfig,
+    functionName: "availDragons",
+    onSuccess(data: any) {
+      setPolyragons((prev) => {
+        const tmp = [...prev];
+        for (let i = 0; i < tmp.length; i++) {
+          tmp[i].available = Number(data?.[i]);
+        }
+        return tmp;
+      });
+    },
+  } as UseContractReadConfig);
+
   return (
     <Fragment>
       <div className="grid grid-cols-5 gap-5 md:grid-cols-3 sm:grid-cols-1 sm:gap-4">
-        {TYPE_OF_DRAGON.map((item) => (
-          <Card key={item.value} dragon={item}></Card>
+        {polyragons.map((item) => (
+          <Card key={item.value} dragon={item} refetch={refetch}></Card>
         ))}
       </div>
     </Fragment>

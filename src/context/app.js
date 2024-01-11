@@ -1,22 +1,14 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { LOCAL_STORAGE_TYPE_DRAGON } from "@/constants/common.constant";
+import { createContext, useContext, useState } from "react";
 
 const ThemeContext = createContext({});
 
 export const ThemeContextProvider = ({ children }) => {
-  const [typeOfDragon, setTypeOfDragon] = useState("");
-
-  useEffect(() => {
-    const valueTypeDragon = localStorage.getItem(LOCAL_STORAGE_TYPE_DRAGON);
-    if (valueTypeDragon) {
-      setTypeOfDragon(valueTypeDragon);
-    }
-  }, []);
+  const [nofBuyPolyragon, setNofBuyPolyragon] = useState(0);
 
   return (
-    <ThemeContext.Provider value={{ typeOfDragon, setTypeOfDragon }}>
+    <ThemeContext.Provider value={{ nofBuyPolyragon, setNofBuyPolyragon }}>
       {children}
     </ThemeContext.Provider>
   );

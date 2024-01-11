@@ -16,7 +16,8 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["bignumber.js"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/context/app.js"],
   "exclude": ["node_modules"]
