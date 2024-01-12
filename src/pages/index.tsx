@@ -7,11 +7,14 @@ import Section from "@/components/common/Section";
 import DragonCategory from "@/components/dragon-category/DragonCategory";
 import YourPolyragon from "@/components/your-polyragon/YourPolyragon";
 import ReferralLink from "@/components/referral-link/ReferralLink";
+import Thumbnail from "@/assets/images/green.jpg";
 
 const work_sans = Work_Sans({
   subsets: ["latin", "vietnamese"],
   weight: "variable",
 });
+
+const url = "https://polyragon.com";
 
 export default function Home() {
   const { switchNetwork } = useSwitchNetwork();
@@ -29,7 +32,7 @@ export default function Home() {
         <meta property="og:title" content="Polygon Network Reward Pool" />
         <meta property="og:description" content="Polygon Network Reward Pool" />
         <meta property="og:type" content="game" key="type" />
-        <meta property="og:url" content="https://polyragon.com" key="url" />
+        <meta property="og:url" content={`${url}/{Thumbnail}`} key="url" />
         <meta
           property="og:image"
           content="../assets/images/green.jpg"
