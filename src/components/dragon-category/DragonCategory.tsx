@@ -27,6 +27,7 @@ interface ICardProps {
 }
 
 const Card: FC<ICardProps> = ({ dragon, refetch }) => {
+  const coefficient = BigInt(dragon.price / 50);
   const router = useRouter();
   const refToken: any = validAddress(router.query.ref);
 
@@ -34,11 +35,17 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
   const { address, isConnected } = useAccount();
   const { chain } = useNetwork();
 
-  const [number, setNumber] = useState<number>(0);
+  const [quantity, setQuantity] = useState<{
+    numberQuantity: number;
+    bigintQuantity: bigint;
+  }>({
+    numberQuantity: 0,
+    bigintQuantity: BigInt(0),
+  });
   const [total, setTotal] = useState(0);
   const [isConnectedAccount, setIsConnectedAccount] = useState(false);
 
-  const [maticPrice, setMaticPrice] = useState<any>();
+  const [maticPrice, setMaticPrice] = useState<bigint>(BigInt(0));
 
   //@ts-ignore
   const { setNofBuyPolyragon } = useThemeContext();
@@ -51,7 +58,7 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
       //0: tỷ giá USDT - MATIC
       //1: MATIC
       // console.log("hhhhh: ", Number(data[0] / Math.pow(10, 8)).toString());
-      // console.log("hhhhh: ", Number(data[1] / Math.pow(10, 12)).toString());
+
       setMaticPrice(BigInt(data[1]));
     },
     onError(err) {
@@ -60,16 +67,19 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
   } as UseContractReadConfig);
 
   useEffect(() => {
-    const totalPrice = Number(number) * (dragon.price * 1.05);
+    const totalPrice = Number(quantity.numberQuantity) * (dragon.price * 1.05);
     setTotal(totalPrice);
-  }, [number, dragon.price]);
+  }, [quantity.numberQuantity, dragon.price]);
 
   useEffect(() => {
     setIsConnectedAccount(isConnected);
   }, [isConnected]);
 
   const handleChangeInput = (value: number | string, id: number) => {
-    setNumber(Number(value));
+    setQuantity({
+      numberQuantity: Number(value),
+      bigintQuantity: BigInt(Number(value)),
+    });
     refetchPrice();
   };
 
@@ -80,10 +90,10 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
   } = usePrepareContractWrite({
     ...contractConfig,
     functionName: "buyDragon",
-    args: [refToken || address, number],
+    args: [refToken || address, quantity.numberQuantity],
     overrides: {
       //@ts-ignore
-      value: (number * (dragon.price / 50) * maticPrice).toString(),
+      value: (quantity.bigintQuantity * coefficient * maticPrice).toString(),
     },
   } as UsePrepareContractWriteConfig);
 
@@ -120,13 +130,15 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(`Buy ${number} ${dragon.name} success`);
-      setNumber(0);
+      toast.success(`Buy ${quantity.numberQuantity} ${dragon.name} success`);
+      setQuantity({ numberQuantity: 0, bigintQuantity: BigInt(0) });
       refetch();
       setNofBuyPolyragon(Math.random());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
+
+  console.log((maticPrice + maticPrice + maticPrice).toString());
 
   return (
     <div className="flex flex-col overflow-hidden bg-background-secondary rounded-2xl ">
@@ -167,15 +179,20 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
               <button
                 type="button"
                 className="w-1/5 h-full border-none bg-celeste text-m text-call-to-action"
-                onClick={() => setNumber(number - 1)}
-                disabled={number === 0}
+                onClick={() =>
+                  setQuantity({
+                    numberQuantity: quantity.numberQuantity - 1,
+                    bigintQuantity: BigInt(quantity.numberQuantity - 1),
+                  })
+                }
+                disabled={quantity.numberQuantity === 0}
               >
                 -
               </button>
               <input
                 type="number"
                 className="w-3/5 h-full border-none text-m text-caption-label"
-                value={number}
+                value={quantity.numberQuantity}
                 onChange={(e) =>
                   handleChangeInput(e.target.value, dragon.value)
                 }
@@ -183,7 +200,12 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
               <button
                 type="button"
                 className="w-1/5 h-full border-none bg-celeste text-m text-call-to-action"
-                onClick={() => setNumber(number + 1)}
+                onClick={() =>
+                  setQuantity({
+                    numberQuantity: quantity.numberQuantity + 1,
+                    bigintQuantity: BigInt(quantity.numberQuantity + 1),
+                  })
+                }
               >
                 +
               </button>
@@ -217,15 +239,15 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
             type="button"
             className="w-full px-4 py-2 transition-all duration-300 ease-in-out border-none rounded-xl bg-call-to-action hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed"
             onClick={() => (isConnectedAccount ? handleBuy() : open())}
-            disabled={isConnectedAccount && number === 0}
+            disabled={isConnectedAccount && quantity.numberQuantity === 0}
           >
             {isConnectedAccount
               ? `Buy (${
-                  number
+                  quantity.numberQuantity
                     ? (
-                        (number * (dragon.price / 50) * maticPrice) /
-                        1e12
-                      ).toFixed(2)
+                        (quantity.bigintQuantity * coefficient * maticPrice) /
+                        BigInt(1)
+                      ).toString()
                     : 0
                 } MATIC)`
               : "Connect Wallet"}
