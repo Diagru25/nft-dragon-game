@@ -24,7 +24,6 @@ function Header() {
           <NftInfo />
           <div className="flex items-center gap-8">
             <RewardInfo />
-
             <ButtonConnectWallet />
           </div>
         </section>
@@ -34,6 +33,7 @@ function Header() {
       <div className="fixed top-0 left-0 z-50 hidden w-screen sm:block bg-background">
         <div className="flex flex-col justify-between w-full gap-4 px-5 py-4 ">
           <ButtonConnectWallet />
+          <RewardInfo />
           <NftInfo />
         </div>
       </div>

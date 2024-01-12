@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { FC, useEffect, useState } from "react";
 import EmptyIcon from "../icon/Empty";
 import { SYMBOL, contractConfig } from "@/constants/nft.constant";
 import { TYPE_DRAGON } from "@/assets/images";
@@ -26,7 +27,7 @@ const NoData = () => {
   );
 };
 
-const ClaimTotalReward = () => {
+const ClaimTotalReward: FC<{ refetch: any }> = ({ refetch }) => {
   const { chain } = useNetwork();
   //claim
   const {
@@ -37,6 +38,7 @@ const ClaimTotalReward = () => {
     ...contractConfig,
     functionName: "claimReward",
   } as UsePrepareContractWriteConfig);
+
   const {
     data: dataClaim,
     error: claimError,
@@ -67,18 +69,29 @@ const ClaimTotalReward = () => {
   useEffect(() => {
     if (isSuccessClaim) {
       toast.success("Claim reward success!");
+      refetch();
     }
   }, [isSuccessClaim]);
 
   return (
     <div className="flex justify-end w-full">
-      <button
-        onClick={claimReward}
-        type="button"
-        className="px-4 py-3 transition-all duration-300 ease-in-out border-none flex-2 rounded-xl bg-call-to-action w-fit hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed text-[18px] float-right"
-      >
-        Claim All
-      </button>
+      {isLoadingClaim ? (
+        <button
+          type="button"
+          className="w-full px-4 py-2 transition-all duration-300 ease-in-out border-none rounded-xl bg-call-to-action hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed"
+          disabled={true}
+        >
+          Loading...
+        </button>
+      ) : (
+        <button
+          onClick={claimReward}
+          type="button"
+          className="px-4 py-3 transition-all duration-300 ease-in-out border-none flex-2 rounded-xl bg-call-to-action w-fit hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed text-[18px] float-right sm:w-full"
+        >
+          Claim All
+        </button>
+      )}
     </div>
   );
 };
@@ -127,7 +140,7 @@ const YourPolyragon = () => {
     },
   ];
 
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
 
   const [polyragons, setPolyragons] = useState<any>(data);
 
@@ -157,13 +170,18 @@ const YourPolyragon = () => {
       setPolyragons(tmp);
     },
     onError(err) {
-      console.log("errrr: ", err);
+      console.log("Get your polyragon failed: ", err);
     },
   } as UseContractReadConfig);
 
   useEffect(() => {
-    refetch();
-  }, [nofBuyPolyragon, refetch]);
+    const interval = setInterval(() => {
+      if (isConnected) refetch();
+      else return;
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [refetch, isConnected, nofBuyPolyragon]);
 
   if (polyragons.filter((el: any) => el.quantity).length === 0)
     return <NoData />;
@@ -171,19 +189,24 @@ const YourPolyragon = () => {
   return (
     <div className="flex flex-col items-center gap-4 mt-10 ">
       <div className="flex items-center justify-between w-full px-5 py-3 border text-caption-label border-background-secondary rounded-2xl font-space-mono">
-        <p className="flex-1 sm:flex-3">#Polyragon</p>
-        <p className="flex-1">Profit</p>
-        <p className="flex-2">Action</p>
+        <p style={{ flex: 2 }} className="sm:flex-3">
+          Polyragon
+        </p>
+        <p className="flex-1 text-center sm:text-right">Profit</p>
+        <p className="flex-1 text-center sm:hidden">Action</p>
       </div>
 
       {polyragons
         .filter((el: any) => el.quantity)
         .map((item: any) => (
           <div
-            key={item.id}
+            key={item.key}
             className="flex items-center w-full px-5 py-3 bg-background-secondary rounded-2xl font-space-mono"
           >
-            <p className="flex items-center flex-1 gap-2 transition-all duration-300 ease-in-out cursor-pointer sm:flex-3 hover:scale-95">
+            <p
+              style={{ flex: 2 }}
+              className="flex items-center gap-2 transition-all duration-300 ease-in-out cursor-pointer flex-2 sm:flex-3 hover:scale-95"
+            >
               <Image
                 src={item.imgSrc}
                 alt={item.name}
@@ -195,18 +218,20 @@ const YourPolyragon = () => {
                 {item.name} ({item.quantity})
               </span>
             </p>
-            <p className="flex-1 text-base">
+            <p className="flex-1 text-base text-center sm:text-right">
               {item.profit} {SYMBOL.DIAMOND}
             </p>
-            <button
-              type="button"
-              className="px-2 py-1 transition-all duration-300 ease-in-out border-none flex-2 rounded-xl bg-call-to-action w-fit hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed"
-            >
-              Claim
-            </button>
+            <div className="flex-1 text-center sm:hidden">
+              <button
+                type="button"
+                className="px-2 py-1 transition-all duration-300 ease-in-out border-none flex-2 rounded-xl bg-call-to-action w-fit hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed"
+              >
+                Claim
+              </button>
+            </div>
           </div>
         ))}
-      <ClaimTotalReward />
+      <ClaimTotalReward refetch={refetch} />
     </div>
   );
 };
