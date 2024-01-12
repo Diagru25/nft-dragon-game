@@ -20,11 +20,20 @@ import { useWeb3Modal } from "@web3modal/react";
 import { toast } from "react-toastify";
 import { contractConfig } from "@/constants/nft.constant";
 import { useThemeContext } from "@/context/app";
+import { BigDecimal } from "@/helpers/number";
 
 interface ICardProps {
   dragon: IDragon;
   refetch: any;
 }
+
+const calMaticPriceView = (num1: string, num2: string) => {
+  const a = new BigDecimal(num1);
+  const b = new BigDecimal(num2);
+
+  const result = a.divide(b).toString();
+  return Number(result).toFixed(2);
+};
 
 const Card: FC<ICardProps> = ({ dragon, refetch }) => {
   const coefficient = BigInt(dragon.price / 50);
@@ -247,10 +256,14 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
             {isConnectedAccount
               ? `Buy (${
                   quantity.numberQuantity
-                    ? (
-                        (quantity.bigintQuantity * coefficient * maticPrice) /
-                        BigInt(1e12)
-                      ).toString()
+                    ? calMaticPriceView(
+                        (
+                          quantity.bigintQuantity *
+                          coefficient *
+                          maticPrice
+                        ).toString(),
+                        BigInt(1e12).toString()
+                      )
                     : 0
                 } MATIC)`
               : "Connect Wallet"}

@@ -19,12 +19,3 @@ export const shortString = (str: string) => {
 
   return first + "..." + last;
 };
-
-export const calculateMaticToSend = (
-  coefficient: number,
-  price: bigint
-): string => {
-  const result: bigint = BigInt(BigInt(1) * (BigInt(100) / BigInt(50))) * price;
-
-  return result.toString();
-};
