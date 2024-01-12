@@ -103,7 +103,6 @@ const YourPolyragon = () => {
       quantity: 0,
       profit: 0,
       unclaim: 0,
-      claimedProfit: 0,
       name: "Bronze Polyragon",
       imgSrc: TYPE_DRAGON.BRONZE,
     },
@@ -112,7 +111,6 @@ const YourPolyragon = () => {
       quantity: 0,
       profit: 0,
       unclaim: 0,
-      claimedProfit: 0,
       name: "Silver Polyragon",
       imgSrc: TYPE_DRAGON.SILVER,
     },
@@ -121,7 +119,6 @@ const YourPolyragon = () => {
       quantity: 0,
       profit: 0,
       unclaim: 0,
-      claimedProfit: 0,
       name: "Gold Polyragon",
       imgSrc: TYPE_DRAGON.GOLD,
     },
@@ -130,7 +127,6 @@ const YourPolyragon = () => {
       quantity: 0,
       profit: 0,
       unclaim: 0,
-      claimedProfit: 0,
       name: "Diamond Polyragon",
       imgSrc: TYPE_DRAGON.DIAMOND,
     },
@@ -139,7 +135,6 @@ const YourPolyragon = () => {
       quantity: 0,
       profit: 0,
       unclaim: 0,
-      claimedProfit: 0,
       name: "Ruby Polyragon",
       imgSrc: TYPE_DRAGON.RUBY,
     },
@@ -158,8 +153,8 @@ const YourPolyragon = () => {
     args: [address],
     onSuccess(data: any) {
       //0: quantity
-      //1: profit
-      //2: claimed profit
+      //1: unclaim
+      //2: profit
       const tmp = [...polyragons];
 
       for (let i = 0; i < data.length; i += 3) {
@@ -167,8 +162,8 @@ const YourPolyragon = () => {
         tmp[index] = {
           ...tmp[index],
           quantity: Number(data?.[i]),
-          profit: Number(data?.[i + 1]),
-          claimedProfit: Number(data?.[i + 2]),
+          unclaim: Number(data?.[i + 1]),
+          profit: Number(data?.[i + 2]),
         };
       }
 
