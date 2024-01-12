@@ -24,11 +24,17 @@ export default function Home() {
     <>
       <Head>
         <title>Polygon Network Reward Pool</title>
-        <meta name="description" content="aaaaaaa" />
+        <meta name="description" content="Polygon Network Reward Pool" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:title" content="Polygon Network Reward Pool" />
         <meta property="og:description" content="Polygon Network Reward Pool" />
-        {/* <meta property="og:image" content="/opengraph-image.jpg" /> */}
+        <meta property="og:type" content="game" key="type" />
+        <meta property="og:url" content="https://polyragon.com" key="url" />
+        <meta
+          property="og:image"
+          content="../assets/images/green.jpg"
+          key="image"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${work_sans.className} relative`}>
@@ -46,11 +52,7 @@ export default function Home() {
           >
             <YourPolyragon />
           </Section>
-
           <ReferralLink />
-
-          {/* <Earn chain={chain} address={address} />
-          <Feed className="absolute feed-container" chain={chain} /> */}
         </div>
       </main>
     </>
