@@ -12,7 +12,11 @@ const Footer = () => {
             Join our community
           </p>
           <div className="flex items-center gap-2">
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://t.me/Polyragoncommunity"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <TelegramIcon />
             </a>
 
