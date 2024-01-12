@@ -162,8 +162,8 @@ const YourPolyragon = () => {
         tmp[index] = {
           ...tmp[index],
           quantity: Number(data?.[i]),
-          unclaim: Number(data?.[i + 1]),
-          profit: Number(data?.[i + 2]),
+          unclaim: Number(data?.[i + 1]) / 100,
+          profit: Number(data?.[i + 2]) / 100,
         };
       }
 
