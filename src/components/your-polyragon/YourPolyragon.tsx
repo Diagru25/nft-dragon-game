@@ -177,7 +177,7 @@ const YourPolyragon = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (isConnected) refetch();
-      else setPolyragons([]);
+      else setPolyragons(data);
     }, 5000);
 
     return () => clearInterval(interval);
