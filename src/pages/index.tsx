@@ -33,6 +33,7 @@ export default function Home() {
         <meta property="og:description" content="Polygon Network Reward Pool" />
         <meta property="og:type" content="game" key="type" />
         <meta property="og:url" content="https://polyragon.com" key="url" />
+        <meta property="og:image" content="/opengraph-image.jpg" key="iamge" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${work_sans.className} relative`}>
