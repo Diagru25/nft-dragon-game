@@ -52,7 +52,7 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
       //1: MATIC
       // console.log("hhhhh: ", Number(data[0] / Math.pow(10, 8)).toString());
       // console.log("hhhhh: ", Number(data[1] / Math.pow(10, 12)).toString());
-      setMaticPrice(Number(data[1]));
+      setMaticPrice(BigInt(data[1]));
     },
     onError(err) {
       console.log("minDragonsPrice", err);
