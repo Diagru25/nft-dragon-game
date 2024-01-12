@@ -33,7 +33,7 @@ const RewardInfo = () => {
     const interval = setInterval(() => {
       if (isConnected) refetch();
       else return;
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [refetch, isConnected]);

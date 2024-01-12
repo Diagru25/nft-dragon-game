@@ -102,6 +102,7 @@ const YourPolyragon = () => {
       key: 1,
       quantity: 0,
       profit: 0,
+      unclaim: 0,
       claimedProfit: 0,
       name: "Bronze Polyragon",
       imgSrc: TYPE_DRAGON.BRONZE,
@@ -110,6 +111,7 @@ const YourPolyragon = () => {
       key: 2,
       quantity: 0,
       profit: 0,
+      unclaim: 0,
       claimedProfit: 0,
       name: "Silver Polyragon",
       imgSrc: TYPE_DRAGON.SILVER,
@@ -118,6 +120,7 @@ const YourPolyragon = () => {
       key: 3,
       quantity: 0,
       profit: 0,
+      unclaim: 0,
       claimedProfit: 0,
       name: "Gold Polyragon",
       imgSrc: TYPE_DRAGON.GOLD,
@@ -126,6 +129,7 @@ const YourPolyragon = () => {
       key: 4,
       quantity: 0,
       profit: 0,
+      unclaim: 0,
       claimedProfit: 0,
       name: "Diamond Polyragon",
       imgSrc: TYPE_DRAGON.DIAMOND,
@@ -134,6 +138,7 @@ const YourPolyragon = () => {
       key: 5,
       quantity: 0,
       profit: 0,
+      unclaim: 0,
       claimedProfit: 0,
       name: "Ruby Polyragon",
       imgSrc: TYPE_DRAGON.RUBY,
@@ -193,7 +198,7 @@ const YourPolyragon = () => {
           Polyragon
         </p>
         <p className="flex-1 text-center sm:text-right">Profit</p>
-        <p className="flex-1 text-center sm:hidden">Action</p>
+        <p className="flex-1 text-center sm:text-right">Unclaim</p>
       </div>
 
       {polyragons
@@ -221,14 +226,9 @@ const YourPolyragon = () => {
             <p className="flex-1 text-base text-center sm:text-right">
               {item.profit} {SYMBOL.DIAMOND}
             </p>
-            <div className="flex-1 text-center sm:hidden">
-              <button
-                type="button"
-                className="px-2 py-1 transition-all duration-300 ease-in-out border-none flex-2 rounded-xl bg-call-to-action w-fit hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed"
-              >
-                Claim
-              </button>
-            </div>
+            <p className="flex-1 text-base text-center sm:text-right">
+              {item.unclaim} {SYMBOL.DIAMOND}
+            </p>
           </div>
         ))}
       <ClaimTotalReward refetch={refetch} />
