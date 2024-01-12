@@ -97,6 +97,11 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
     },
   } as UsePrepareContractWriteConfig);
 
+  // console.log(
+  //   (quantity.bigintQuantity * coefficient * maticPrice).toString(),
+  //   maticPrice.toString()
+  // );
+
   const {
     data,
     error: feedError,
@@ -137,8 +142,6 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
-
-  console.log((maticPrice + maticPrice + maticPrice).toString());
 
   return (
     <div className="flex flex-col overflow-hidden bg-background-secondary rounded-2xl ">
@@ -246,7 +249,7 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
                   quantity.numberQuantity
                     ? (
                         (quantity.bigintQuantity * coefficient * maticPrice) /
-                        BigInt(1)
+                        BigInt(1e12)
                       ).toString()
                     : 0
                 } MATIC)`
