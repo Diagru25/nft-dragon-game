@@ -75,10 +75,10 @@ const ClaimTotalReward: FC<{ refetch: any }> = ({ refetch }) => {
 
   return (
     <div className="flex justify-end w-full">
-      {isLoadingClaim ? (
+      {!isLoadingClaim ? (
         <button
           type="button"
-          className="w-full px-4 py-2 transition-all duration-300 ease-in-out border-none rounded-xl bg-call-to-action hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed"
+          className="px-4 py-3 transition-all duration-300 ease-in-out border-none flex-2 rounded-xl bg-call-to-action w-fit hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:text-celeste disabled:cursor-not-allowed text-[18px] float-right sm:w-full"
           disabled={true}
         >
           Loading...
@@ -219,10 +219,10 @@ const YourPolyragon = () => {
               </span>
             </p>
             <p className="flex-1 text-base text-center sm:text-right">
-              {item.profit} {SYMBOL.DIAMOND}
+              {item.profit.toFixed(2)} {SYMBOL.DIAMOND}
             </p>
             <p className="flex-1 text-base text-center sm:text-right">
-              {item.unclaim} {SYMBOL.DIAMOND}
+              {item.unclaim.toFixed(2)} {SYMBOL.DIAMOND}
             </p>
           </div>
         ))}

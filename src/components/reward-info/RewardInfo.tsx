@@ -19,9 +19,9 @@ const RewardInfo = () => {
       //1: ref
       //2: total
       setReward({
-        profit: Number(data?.[0]),
-        ref: Number(data?.[1]),
-        total: Number(data?.[2]),
+        profit: Number(data?.[0]) / 100,
+        ref: Number(data?.[1]) / 100,
+        total: Number(data?.[2]) / 100,
       });
     },
     onError(err) {
@@ -45,13 +45,13 @@ const RewardInfo = () => {
           <span className="font-semibold text-caption-label text-s">
             Polyragon Profit:{" "}
           </span>
-          {reward.profit} {SYMBOL.DIAMOND}
+          {reward.profit.toFixed(2)} {SYMBOL.DIAMOND}
         </p>
         <p className="px-2">
           <span className="font-semibold text-caption-label text-s">
             Referral Reward:{" "}
           </span>
-          {reward.ref} {SYMBOL.DIAMOND}
+          {reward.ref.toFixed(2)} {SYMBOL.DIAMOND}
         </p>
       </div>
     ) : (

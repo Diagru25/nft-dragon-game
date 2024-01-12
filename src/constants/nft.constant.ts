@@ -1,7 +1,7 @@
 import { nftABI } from "./abi";
 
 export const contractConfig = {
-  address: "0x0bECa26d2EbD2b51B5b1733e4b0B8aA2f812F3A0",
+  address: "0x90a26EAb4d2D7C62F7f610fF7a67B42B91C73eed",
   abi: nftABI,
 };
 
