@@ -32,12 +32,7 @@ export default function Home() {
         <meta property="og:title" content="Polygon Network Reward Pool" />
         <meta property="og:description" content="Polygon Network Reward Pool" />
         <meta property="og:type" content="game" key="type" />
-        <meta property="og:url" content={`${url}/{Thumbnail}`} key="url" />
-        <meta
-          property="og:image"
-          content="../assets/images/green.jpg"
-          key="image"
-        />
+        <meta property="og:url" content="https://polyragon.com" key="url" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${work_sans.className} relative`}>
