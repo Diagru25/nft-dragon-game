@@ -201,7 +201,7 @@ const Card: FC<ICardProps> = ({ dragon }) => {
                 -
               </button>
               <input
-                placeholder="number of polyragon"
+                placeholder="Enter quantity"
                 type="text"
                 inputMode="numeric"
                 className="w-3/5 h-full border-none text-m text-caption-label"
