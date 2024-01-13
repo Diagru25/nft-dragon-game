@@ -128,10 +128,12 @@ const Card: FC<ICardProps> = ({ dragon }) => {
     }
     if (isPrepareError) {
       //@ts-ignore
-      return toast.error(
-        //@ts-ignore
-        prepareError?.error?.data?.message || prepareError?.message
-      );
+      let msg = prepareError?.error?.data?.message || prepareError?.message;
+
+      if (msg === "execution reverted: Dragons: invalid ref")
+        msg = "First time buyer must have a referral";
+
+      return toast.error(msg);
     }
     // if (isFeedError) {
     //   console.log("feed err");
