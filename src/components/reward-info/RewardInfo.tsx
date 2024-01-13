@@ -44,9 +44,9 @@ const RewardInfo = () => {
       <div className="flex items-center justify-start divide-x sm:justify-center divide-caption-label text-s">
         <p className="pr-2">
           <span className="font-semibold text-caption-label text-s">
-            Polyragon Profit:{" "}
+            Total Referral Reward:{" "}
           </span>
-          {numberWithCommas(reward.profit.toFixed(2))} {SYMBOL.DIAMOND}
+          {numberWithCommas(reward.total.toFixed(2))} {SYMBOL.DIAMOND}
         </p>
         <p className="px-2">
           <span className="font-semibold text-caption-label text-s">
