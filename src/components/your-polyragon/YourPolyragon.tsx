@@ -17,6 +17,7 @@ import {
 } from "wagmi";
 import { toast } from "react-toastify";
 import { useThemeContext } from "@/context/app";
+import { numberWithCommas } from "@/helpers/string";
 
 const NoData = () => {
   return (
@@ -216,14 +217,14 @@ const YourPolyragon = () => {
                 className="w-10 h-10 rounded-full"
               />
               <span className="font-semibold capitalize text-l sm:text-s">
-                {item.name} ({item.quantity})
+                {item.name} ({numberWithCommas(item.quantity)})
               </span>
             </p>
             <p className="flex-1 text-base text-center sm:text-right">
-              {item.profit.toFixed(2)} {SYMBOL.DIAMOND}
+              {numberWithCommas(item.profit.toFixed(2))} {SYMBOL.DIAMOND}
             </p>
             <p className="flex-1 text-base text-center sm:text-right">
-              {item.unclaim.toFixed(2)} {SYMBOL.DIAMOND}
+              {numberWithCommas(item.unclaim.toFixed(2))} {SYMBOL.DIAMOND}
             </p>
           </div>
         ))}

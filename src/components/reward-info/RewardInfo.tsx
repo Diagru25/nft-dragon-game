@@ -1,4 +1,5 @@
 import { SYMBOL, contractConfig } from "@/constants/nft.constant";
+import { numberWithCommas } from "@/helpers/string";
 import React, { useEffect, useState } from "react";
 import { UseContractReadConfig, useAccount, useContractRead } from "wagmi";
 
@@ -45,13 +46,13 @@ const RewardInfo = () => {
           <span className="font-semibold text-caption-label text-s">
             Polyragon Profit:{" "}
           </span>
-          {reward.profit.toFixed(2)} {SYMBOL.DIAMOND}
+          {numberWithCommas(reward.profit.toFixed(2))} {SYMBOL.DIAMOND}
         </p>
         <p className="px-2">
           <span className="font-semibold text-caption-label text-s">
             Referral Reward:{" "}
           </span>
-          {reward.ref.toFixed(2)} {SYMBOL.DIAMOND}
+          {numberWithCommas(reward.ref.toFixed(2))} {SYMBOL.DIAMOND}
         </p>
       </div>
     ) : (

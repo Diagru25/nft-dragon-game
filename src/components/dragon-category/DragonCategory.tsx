@@ -21,6 +21,7 @@ import { toast } from "react-toastify";
 import { contractConfig } from "@/constants/nft.constant";
 import { useThemeContext } from "@/context/app";
 import { BigDecimal } from "@/helpers/number";
+import { numberWithCommas } from "@/helpers/string";
 
 interface ICardProps {
   dragon: IDragon;
@@ -31,7 +32,7 @@ const calMaticPriceView = (num1: string, num2: string) => {
   const b = new BigDecimal(num2);
 
   const result = a.divide(b).toString();
-  return Number(result).toFixed(2);
+  return numberWithCommas(Number(result).toFixed(2));
 };
 
 const Card: FC<ICardProps> = ({ dragon }) => {
