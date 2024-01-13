@@ -66,7 +66,7 @@ const Card: FC<ICardProps> = ({ dragon }) => {
     onSuccess(data: any) {
       //0: tỷ giá USDT - MATIC
       //1: MATIC
-      // console.log("hhhhh: ", Number(data[0] / Math.pow(10, 8)).toString());
+      //console.log("hhhhh: ", Number(data[0] / Math.pow(10, 8)).toString());
       setMaticPrice(BigInt(data[1]));
     },
     onError(err) {
@@ -201,6 +201,7 @@ const Card: FC<ICardProps> = ({ dragon }) => {
                 -
               </button>
               <input
+                placeholder="number of polyragon"
                 type="text"
                 inputMode="numeric"
                 className="w-3/5 h-full border-none text-m text-caption-label"
