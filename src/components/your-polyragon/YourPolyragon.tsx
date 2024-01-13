@@ -32,6 +32,7 @@ const ClaimTotalReward: FC<{ refetch: any }> = ({ refetch }) => {
   const { chain } = useNetwork();
   //claim
   const {
+    refetch: refetchClaim,
     config: configClaim,
     error: prepareClaimError,
     isError: isPrepareClaimError,
@@ -65,6 +66,7 @@ const ClaimTotalReward: FC<{ refetch: any }> = ({ refetch }) => {
     }
 
     writeClaim?.();
+    refetchClaim();
   };
 
   useEffect(() => {

@@ -84,6 +84,7 @@ const Card: FC<ICardProps> = ({ dragon }) => {
   }, [isConnected]);
 
   const handleChangeInput = (value: number | string, id: number) => {
+    if (isNaN(Number(value))) return;
     setQuantity({
       numberQuantity: Number(value),
       bigintQuantity: BigInt(Number(value)),
@@ -200,9 +201,10 @@ const Card: FC<ICardProps> = ({ dragon }) => {
                 -
               </button>
               <input
-                type="number"
+                type="text"
+                inputMode="numeric"
                 className="w-3/5 h-full border-none text-m text-caption-label"
-                value={quantity.numberQuantity}
+                value={quantity.numberQuantity || ""}
                 onChange={(e) =>
                   handleChangeInput(e.target.value, dragon.value)
                 }
