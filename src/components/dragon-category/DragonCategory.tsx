@@ -227,15 +227,17 @@ const Card: FC<ICardProps> = ({ dragon }) => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <p className="text-caption-label text-s">Total</p>
             <p className="text-base">
               {total} {SYMBOL.DIAMOND}
             </p>
-          </div>
+          </div> */}
 
           <div className="flex items-center justify-between">
-            <p className="text-caption-label text-s">Included: 5% fee</p>
+            <p className="text-caption-label text-s">
+              Daily profit: {dragon.dailyPercent}%
+            </p>
           </div>
         </div>
       </div>
