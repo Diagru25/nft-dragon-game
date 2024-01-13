@@ -1,21 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CopyIcon from "../icon/Copy";
 import { toast } from "react-toastify";
 import { useAccount } from "wagmi";
 import Image from "next/image";
 import { TYPE_DRAGON } from "@/assets/images";
+import { useThemeContext } from "@/context/app";
 
 const ReferralLink = () => {
   const { address, isConnected } = useAccount();
-  const [refLink] = useState("https***D2f6");
+  const [refLink, setRefLink] = useState("****");
+
+  //@ts-ignore
+  const { isShowRefLink } = useThemeContext();
+
+  useEffect(() => {
+    if (address && isConnected && isShowRefLink) {
+      const inviteLink = `https://polyragon.com?ref=${address}`;
+      setRefLink(inviteLink);
+    } else setRefLink("****");
+  }, [address, isConnected, isShowRefLink]);
 
   const handleCopy = () => {
-    if (isConnected) {
-      const inviteLink = `http://polyragon.com?ref=${address}`;
+    if (address && isConnected && isShowRefLink) {
       navigator.clipboard
-        .writeText(inviteLink)
+        .writeText(refLink)
         .then(() => {
-          const message = `Copy referral code ${inviteLink} success`;
+          const message = `Copy referral link success`;
           return toast.success(message, {});
         })
         .catch(() => {

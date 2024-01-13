@@ -142,10 +142,10 @@ const YourPolyragon = () => {
 
   const { address, isConnected } = useAccount();
 
-  const [polyragons, setPolyragons] = useState<any>(data);
+  const [polyragons, setPolyragons] = useState<any[]>(data);
 
   //@ts-ignore
-  const { nofBuyPolyragon } = useThemeContext();
+  const { nofBuyPolyragon, setIsShowRefLink } = useThemeContext();
 
   const { refetch } = useContractRead({
     ...contractConfig,
@@ -166,7 +166,8 @@ const YourPolyragon = () => {
           profit: Number(data?.[i + 2]) / 100,
         };
       }
-
+      const isFoundObj = tmp.find((el) => el.quantity > 0);
+      setIsShowRefLink(isFoundObj ? true : false);
       setPolyragons(tmp);
     },
     onError(err) {
