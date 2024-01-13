@@ -24,7 +24,6 @@ import { BigDecimal } from "@/helpers/number";
 
 interface ICardProps {
   dragon: IDragon;
-  refetch: any;
 }
 
 const calMaticPriceView = (num1: string, num2: string) => {
@@ -35,7 +34,7 @@ const calMaticPriceView = (num1: string, num2: string) => {
   return Number(result).toFixed(2);
 };
 
-const Card: FC<ICardProps> = ({ dragon, refetch }) => {
+const Card: FC<ICardProps> = ({ dragon }) => {
   const coefficient = BigInt(dragon.price / 50);
   const router = useRouter();
   const refToken: any = validAddress(router.query.ref);
@@ -61,17 +60,16 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
 
   const { refetch: refetchPrice } = useContractRead({
     ...contractConfig,
-    functionName: "minDragonsPrice",
+    functionName: "getMinDragonPrice",
     // args: [address],
     onSuccess(data: any) {
       //0: tỷ giá USDT - MATIC
       //1: MATIC
       // console.log("hhhhh: ", Number(data[0] / Math.pow(10, 8)).toString());
-
       setMaticPrice(BigInt(data[1]));
     },
     onError(err) {
-      console.log("minDragonsPrice", err);
+      //console.log("getMinDragonPrice", err);
     },
   } as UseContractReadConfig);
 
@@ -99,7 +97,7 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
   } = usePrepareContractWrite({
     ...contractConfig,
     functionName: "buyDragon",
-    args: [refToken || address, quantity.numberQuantity],
+    args: [refToken || address, quantity.numberQuantity, dragon.value],
     overrides: {
       //@ts-ignore
       value: (quantity.bigintQuantity * coefficient * maticPrice).toString(),
@@ -146,7 +144,6 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
     if (isSuccess) {
       toast.success(`Buy ${quantity.numberQuantity} ${dragon.name} success`);
       setQuantity({ numberQuantity: 0, bigintQuantity: BigInt(0) });
-      refetch();
       setNofBuyPolyragon(Math.random());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -176,7 +173,7 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
             </p>
           </div>
 
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <p className="text-caption-label text-s">
               Limited: <span className="text-white">{dragon.max}</span>
             </p>
@@ -184,7 +181,7 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
             <p className="text-caption-label text-s">
               Left: <span className="text-white">{dragon.available}</span>
             </p>
-          </div>
+          </div> */}
 
           <div className="flex flex-wrap items-center justify-between my-1">
             <div className="flex justify-center w-full h-6 overflow-hidden rounded-lg">
@@ -275,27 +272,11 @@ const Card: FC<ICardProps> = ({ dragon, refetch }) => {
 };
 
 const DragonCategory = () => {
-  const [polyragons, setPolyragons] = useState(TYPE_OF_DRAGON);
-
-  const { refetch } = useContractRead({
-    ...contractConfig,
-    functionName: "availDragons",
-    onSuccess(data: any) {
-      setPolyragons((prev) => {
-        const tmp = [...prev];
-        for (let i = 0; i < tmp.length; i++) {
-          tmp[i].available = Number(data?.[i]);
-        }
-        return tmp;
-      });
-    },
-  } as UseContractReadConfig);
-
   return (
     <Fragment>
       <div className="grid grid-cols-5 gap-5 md:grid-cols-3 sm:grid-cols-1 sm:gap-4">
-        {polyragons.map((item) => (
-          <Card key={item.value} dragon={item} refetch={refetch}></Card>
+        {TYPE_OF_DRAGON.map((item) => (
+          <Card key={item.value} dragon={item}></Card>
         ))}
       </div>
     </Fragment>

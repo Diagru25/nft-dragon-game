@@ -89,7 +89,7 @@ const ClaimTotalReward: FC<{ refetch: any }> = ({ refetch }) => {
           type="button"
           className="px-4 py-3 transition-all duration-300 ease-in-out border-none flex-2 rounded-xl bg-call-to-action w-fit hover:scale-95 focus:outline-none disabled:transition-none disabled:scale-100 disabled:bg-background disabled:text-celeste disabled:cursor-not-allowed text-[18px] float-right sm:w-full"
         >
-          Claim All
+          Claim
         </button>
       )}
     </div>
@@ -149,7 +149,7 @@ const YourPolyragon = () => {
 
   const { refetch } = useContractRead({
     ...contractConfig,
-    functionName: "getDragonsOfPlayer",
+    functionName: "getDragonsPlayer",
     args: [address],
     onSuccess(data: any) {
       //0: quantity
@@ -171,7 +171,7 @@ const YourPolyragon = () => {
       setPolyragons(tmp);
     },
     onError(err) {
-      console.log("Get your polyragon failed: ", err);
+      //console.log("Get your polyragon failed: ", err);
     },
   } as UseContractReadConfig);
 

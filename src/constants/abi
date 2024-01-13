@@ -2,12 +2,12 @@ export const nftABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "uint16[]",
-				"name": "_addAvail",
-				"type": "uint16[]"
+				"internalType": "address[]",
+				"name": "_whitelist",
+				"type": "address[]"
 			}
 		],
-		"name": "addDragonsAvail",
+		"name": "addWhitelist",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -23,43 +23,16 @@ export const nftABI = [
 				"internalType": "uint16",
 				"name": "quantity",
 				"type": "uint16"
+			},
+			{
+				"internalType": "uint8",
+				"name": "dragonType",
+				"type": "uint8"
 			}
 		],
 		"name": "buyDragon",
 		"outputs": [],
 		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "sender",
-				"type": "address"
-			}
-		],
-		"name": "calculateClaimReward",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "devTax",
-				"type": "uint256"
-			}
-		],
-		"name": "changeDevTax",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -77,30 +50,15 @@ export const nftABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "pause",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "oracleAddr",
-				"type": "address"
-			}
-		],
-		"name": "setOracleAddr",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
 				"name": "devTax",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "minWithdrawTime",
 				"type": "uint256"
 			},
 			{
@@ -169,6 +127,13 @@ export const nftABI = [
 		"type": "event"
 	},
 	{
+		"inputs": [],
+		"name": "pause",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -182,8 +147,34 @@ export const nftABI = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_whitelist",
+				"type": "address[]"
+			}
+		],
+		"name": "removeWhitelist",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "devTax",
+				"type": "uint256"
+			}
+		],
+		"name": "setDevTax",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -197,6 +188,19 @@ export const nftABI = [
 			}
 		],
 		"name": "setMainWallet",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "oracleAddr",
+				"type": "address"
+			}
+		],
+		"name": "setOracleAddr",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -223,6 +227,19 @@ export const nftABI = [
 			}
 		],
 		"name": "setVestingPoolAddr",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "minWithdrawTime",
+				"type": "uint256"
+			}
+		],
+		"name": "setWithdrawTime",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -262,48 +279,6 @@ export const nftABI = [
 	},
 	{
 		"inputs": [],
-		"name": "availDragons",
-		"outputs": [
-			{
-				"internalType": "uint16[]",
-				"name": "",
-				"type": "uint16[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "sender",
-				"type": "address"
-			}
-		],
-		"name": "calculateReward",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "getBalance",
 		"outputs": [
 			{
@@ -332,11 +307,11 @@ export const nftABI = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "playerAddr",
+				"name": "_player",
 				"type": "address"
 			}
 		],
-		"name": "getDragonsOfPlayer",
+		"name": "getDragonsPlayer",
 		"outputs": [
 			{
 				"internalType": "uint256[]",
@@ -355,6 +330,24 @@ export const nftABI = [
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getMinDragonPrice",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -387,8 +380,50 @@ export const nftABI = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			}
+		],
+		"name": "getRewardPlayer",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "getTvl",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getUsdPrice",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -414,17 +449,31 @@ export const nftABI = [
 	},
 	{
 		"inputs": [],
-		"name": "minDragonsPrice",
+		"name": "getWithdrawTime",
 		"outputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			},
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			}
+		],
+		"name": "isWhitelist",
+		"outputs": [
+			{
+				"internalType": "bool",
 				"name": "",
-				"type": "uint256"
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -451,19 +500,6 @@ export const nftABI = [
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "usdPrice",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

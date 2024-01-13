@@ -5,7 +5,7 @@ export const TYPE_OF_DRAGON: IDragon[] = [
   {
     imgSrc: TYPE_DRAGON.BRONZE,
     label: "Bronze Polyragon",
-    value: 1,
+    value: 0,
     price: 50,
     name: "Bronze Polyragon",
     upTo: "0.5",
@@ -17,7 +17,7 @@ export const TYPE_OF_DRAGON: IDragon[] = [
   {
     imgSrc: TYPE_DRAGON.SILVER,
     label: "Silver Polyragon",
-    value: 2,
+    value: 1,
     price: 100,
     name: "Silver Polyragon",
     upTo: "2",
@@ -29,7 +29,7 @@ export const TYPE_OF_DRAGON: IDragon[] = [
   {
     imgSrc: TYPE_DRAGON.GOLD,
     label: "Gold Polyragon",
-    value: 3,
+    value: 2,
     price: 200,
     name: "Gold Polyragon",
     upTo: "8",
@@ -41,7 +41,7 @@ export const TYPE_OF_DRAGON: IDragon[] = [
   {
     imgSrc: TYPE_DRAGON.DIAMOND,
     label: "Diamond Polyragon",
-    value: 4,
+    value: 3,
     price: 500,
     name: "Diamond Polyragon",
     upTo: "30",
@@ -53,7 +53,7 @@ export const TYPE_OF_DRAGON: IDragon[] = [
   {
     imgSrc: TYPE_DRAGON.RUBY,
     label: "Ruby Polyragon",
-    value: 5,
+    value: 4,
     price: 1000,
     name: "Ruby Polyragon",
     upTo: "80",

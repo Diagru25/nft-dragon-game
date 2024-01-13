@@ -12,7 +12,7 @@ const RewardInfo = () => {
 
   const { refetch } = useContractRead({
     ...contractConfig,
-    functionName: "calculateReward",
+    functionName: "getRewardPlayer",
     args: [address],
     onSuccess(data: any) {
       //0: profit
