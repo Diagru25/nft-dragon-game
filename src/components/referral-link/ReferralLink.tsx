@@ -5,6 +5,7 @@ import { useAccount } from "wagmi";
 import Image from "next/image";
 import { TYPE_DRAGON } from "@/assets/images";
 import { useThemeContext } from "@/context/app";
+import { shortString } from "@/helpers/string";
 
 const ReferralLink = () => {
   const { address, isConnected } = useAccount();
@@ -15,15 +16,16 @@ const ReferralLink = () => {
 
   useEffect(() => {
     if (address && isConnected && isShowRefLink) {
-      const inviteLink = `https://polyragon.com?ref=${address}`;
+      const inviteLink = `https://polyragon.com?ref=${shortString(address)}`;
       setRefLink(inviteLink);
     } else setRefLink("****");
   }, [address, isConnected, isShowRefLink]);
 
   const handleCopy = () => {
     if (address && isConnected && isShowRefLink) {
+      const inviteLink = `https://polyragon.com?ref=${address}`;
       navigator.clipboard
-        .writeText(refLink)
+        .writeText(inviteLink)
         .then(() => {
           const message = `Copy referral link success`;
           return toast.success(message, {});
