@@ -75,7 +75,7 @@ const Card: FC<ICardProps> = ({ dragon }) => {
   } as UseContractReadConfig);
 
   useEffect(() => {
-    const totalPrice = Number(quantity.numberQuantity) * (dragon.price * 1.05);
+    const totalPrice = Number(quantity.numberQuantity) * dragon.price;
     setTotal(totalPrice);
   }, [quantity.numberQuantity, dragon.price]);
 
@@ -124,7 +124,7 @@ const Card: FC<ICardProps> = ({ dragon }) => {
 
   const handleBuy = () => {
     if (chain?.id !== 80001 && chain?.id !== 137) {
-      return toast.error("Wrong chain! You must move to Arbitrum");
+      return toast.error("Wrong chain! You must move to Polygon");
     }
     if (isPrepareError) {
       //@ts-ignore
@@ -227,12 +227,12 @@ const Card: FC<ICardProps> = ({ dragon }) => {
             </div>
           </div>
 
-          {/* <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <p className="text-caption-label text-s">Total</p>
             <p className="text-base">
               {total} {SYMBOL.DIAMOND}
             </p>
-          </div> */}
+          </div>
 
           <div className="flex items-center justify-between">
             <p className="text-caption-label text-s">
@@ -267,7 +267,7 @@ const Card: FC<ICardProps> = ({ dragon }) => {
                           coefficient *
                           maticPrice
                         ).toString(),
-                        BigInt(1e12).toString()
+                        BigInt(1e18).toString()
                       )
                     : 0
                 } MATIC)`

@@ -20,7 +20,7 @@ export default function Home() {
   const { switchNetwork } = useSwitchNetwork();
 
   useEffect(() => {
-    switchNetwork?.(80001);
+    switchNetwork?.(137);
   }, [switchNetwork]);
 
   return (
