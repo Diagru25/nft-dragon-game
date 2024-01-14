@@ -63,21 +63,6 @@ export const nftABI = [
 			},
 			{
 				"internalType": "address",
-				"name": "vestingPoolAddr",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "mainWallet",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "refWallet",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
 				"name": "oraclerAddr",
 				"type": "address"
 			}
@@ -183,50 +168,11 @@ export const nftABI = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "mainWallet",
-				"type": "address"
-			}
-		],
-		"name": "setMainWallet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "oracleAddr",
 				"type": "address"
 			}
 		],
 		"name": "setOracleAddr",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "refWallet",
-				"type": "address"
-			}
-		],
-		"name": "setRefWallet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "vestingPoolAddr",
-				"type": "address"
-			}
-		],
-		"name": "setVestingPoolAddr",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -343,19 +289,6 @@ export const nftABI = [
 	},
 	{
 		"inputs": [],
-		"name": "getMainWallet",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "getMinDragonPrice",
 		"outputs": [
 			{
@@ -375,19 +308,6 @@ export const nftABI = [
 	{
 		"inputs": [],
 		"name": "getOracleAddr",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getRefWallet",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -448,19 +368,6 @@ export const nftABI = [
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getVestingPoolAddr",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
 			}
 		],
 		"stateMutability": "view",
